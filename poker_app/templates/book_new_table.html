@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block page_content %}
+
+
+    <div id="booktable" class="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="titlepage">
+                        <h3>Book Table Now</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="white_bg">
+                <div class="row">
+
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="contact">
+
+                            <form>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <input class="contactus" placeholder="Name" type="text" name="Name">
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <input class="contactus" placeholder="Phone" type="text" name="Email">
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <input class="contactus" placeholder="Email" type="text" name="Email">
+                                    </div>
+                                    <div class="col-sm-12">
+                                    <textarea class="textarea" placeholder="Message" type="text"
+                                              name="Message"></textarea>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <button class="send">Send</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="rable-box">
+                            <figure><img src="/static/images/cac.png" alt="#"/>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
