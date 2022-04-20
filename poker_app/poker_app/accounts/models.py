@@ -45,11 +45,6 @@ class Profile(models.Model):
     LAST_NAME_MIN_LENGTH = 2
     LAST_NAME_MAX_LENGTH = 30
 
-    MALE = 'Male'
-    FEMALE = 'Female'
-    DO_NOT_SHOW = 'Do not show'
-
-    GENDERS = [(x, x) for x in (MALE, FEMALE, DO_NOT_SHOW)]
     #
     # first_name = models.CharField(
     #     max_length=FIRST_NAME_MAX_LENGTH,
@@ -84,13 +79,13 @@ class Profile(models.Model):
         blank=True,
     )
 
-    user = models.OneToOneField(
-        PokerUser,
-        on_delete=models.CASCADE,
-        # primary_key=True,
-    )
+    # user = models.OneToOneField(
+    #     PokerUser,
+    #     on_delete=models.CASCADE,
+    #     # primary_key=True,
+    # )
 
-    def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+    # def __str__(self):
+    #     return f'{self.first_name} {self.last_name}'
 
 

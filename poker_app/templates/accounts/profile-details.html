@@ -1,0 +1,24 @@
+{#{% extends 'base.html' %}#}
+{##}
+{#{% block page_content %}#}
+    <h1 class="text-center">Edit Your Profile</h1>
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+{#            <form method="post" action="{% url 'edit profile page'  %}">#}
+                <h1>It works Dobri</h1>
+                {{ profile.email }}
+
+{#                {% if is_owner %}#}
+            <div>
+            <a href="{% url 'dashboard' %}" class="btn btn-primary">Edit</a>
+{#                    <a href="{% url 'delete profile' %}" class="btn btn-danger">Delete</a>#}
+{#                {% endif %}>#}
+
+{#            </form>#}
+             </div>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+
+{#{% endblock %}#}

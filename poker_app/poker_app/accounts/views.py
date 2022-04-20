@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from django.views import generic as views
 from django.contrib.auth import views as auth_views
 
@@ -5,7 +6,9 @@ from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
 
 from poker_app.accounts.forms import EditProfileForm
+from poker_app.accounts.models import Profile
 from poker_app.web.forms import CreateProfileForm
+from poker_app.web.models import Table
 from poker_app.web.views_mixin import RedirectToHomePage
 
 
@@ -30,3 +33,41 @@ class UserLoginView(auth_views.LoginView):
 class EditProfileView(views.UpdateView):
     template_name = 'accounts/profile_edit.html'
     form_class = EditProfileForm
+
+
+def show_profile(request):
+    profile = Profile.objects.all()[0]
+
+    context = {
+        'profile': profile,
+    }
+    return render(request, 'accounts/profile-details.html', context)
+
+# class ProfileDetailsView(views.DetailView):
+#     model = Profile
+#     template_name = 'accounts/profile-details.html'
+#     context_object_name = 'profile'
+
+# def get_queryset(self):
+#     pass
+#
+# def get_context_data(self, **kwargs):
+#     context = super().get_context_data(**kwargs)
+#     # self.object is a Profile instance
+#     tables = list(Table.objects.filter(user_id=self.object.user_id))
+#     #
+#     #     # pet_photos = PetPhoto.objects \
+#     #     #     .filter(tagged_pets__in=pets) \
+#     #     #     .distinct()
+#     #
+#     #     # total_likes_count = sum(pp.likes for pp in pet_photos)
+#     #     # total_pet_photos_count = len(pet_photos)
+#     #
+#     #     context.update({
+#     #         # 'total_likes_count': total_likes_count,
+#     #         # 'total_pet_photos_count': total_pet_photos_count,
+#     #         'is_owner': self.object.user_id == self.request.user.id,
+#     #         'tables': tables,
+#     #     })
+#     #
+#     return context
