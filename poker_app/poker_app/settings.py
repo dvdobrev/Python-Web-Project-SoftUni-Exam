@@ -38,6 +38,7 @@ INSTALLED_APPS = [
 
     'poker_app.web',
     'poker_app.accounts',
+
 ]
 
 MIDDLEWARE = [
@@ -128,4 +129,5 @@ STATICFILES_DIRS = (
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'accounts.PokerUser'
+# AUTH_USER_MODEL = 'accounts.PokerUser'
+# AUTH_USER_MODEL = 'users.User'

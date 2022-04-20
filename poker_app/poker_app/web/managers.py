@@ -6,9 +6,9 @@ class PokerUserManager(auth_base.BaseUserManager):
     # Put username instead of email if you want the login to be with email
 
     def _create_user(self, username, email, password, **extra_fields):
-        if not email:
+        if not username:
             raise ValueError('The given username must be set')
-        user = self.model(username=username, email=email,**extra_fields)
+        user = self.model(username=username, email=email, **extra_fields)
         user.password = make_password(password)
         user.save(using=self._db)
         return user
@@ -16,7 +16,7 @@ class PokerUserManager(auth_base.BaseUserManager):
     def create_user(self, username, email, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', False)
         extra_fields.setdefault('is_superuser', False)
-        return self._create_user(email, password, **extra_fields)
+        return self._create_user(username, email, password, **extra_fields)
 
     def create_superuser(self, username, email, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)

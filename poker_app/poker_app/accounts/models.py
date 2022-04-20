@@ -1,5 +1,5 @@
-from django.contrib.auth import models as auth_models
-from django.core.validators import MinLengthValidator
+from django.contrib.auth import models as auth_models, get_user_model
+from django.core.validators import MinLengthValidator, MaxValueValidator
 
 from django.db import models
 
@@ -12,8 +12,13 @@ from poker_app.web.validators import validate_only_letters
 3. Create user manager
 '''
 
+UserModel = get_user_model()
 
-class PokerUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
+
+# TODO: 'ADD auth_models.PermissionsMixin to the PokerUser'
+
+
+class PokerUser(auth_models.AbstractBaseUser):  # auth_models.PermissionsMixin
     USERNAME_MAX_LENGTH = 25
 
     username = models.CharField(
@@ -69,35 +74,23 @@ class Profile(models.Model):
         blank=True,
     )
 
-    money = models.IntegerField()
+    slogan = models.TextField(
+        null=True,
+        blank=True,
+    )
 
     email = models.EmailField(
         null=True,
         blank=True,
     )
 
-    # gender = models.CharField(
-    #     max_length=max(len(x) for x, _ in GENDERS),
-    #     choices=GENDERS,
-    #     null=True,
-    #     blank=True,
-    #     # default=DO_NOT_SHOW,
-    # )
-    #
-    # user = models.OneToOneField(
-    #     PokerUser,
-    #     on_delete=models.CASCADE,
-    #     primary_key=True,
-    # )
+    user = models.OneToOneField(
+        PokerUser,
+        on_delete=models.CASCADE,
+        # primary_key=True,
+    )
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
 
-# class Table(models.Model):
-#     name = models.CharField(
-#         max_length=10
-#     )
-#
-#     max_players = models.IntegerField(
-#         default=2
-#     )
+
