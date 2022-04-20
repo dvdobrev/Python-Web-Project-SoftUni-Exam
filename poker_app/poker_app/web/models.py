@@ -20,10 +20,10 @@ class Table(models.Model):
         )
     )
 
-    user = models.ForeignKey(
-        UserModel,
-        on_delete=models.CASCADE,
-        # primary_key=True,
-    )
+    # user = models.ForeignKey(
+    #     UserModel,
+    #     on_delete=models.CASCADE,
+    #     # primary_key=True,
+    # )
 
-    USERNAME_FIELD = 'username'
+    # USERNAME_FIELD = 'username'

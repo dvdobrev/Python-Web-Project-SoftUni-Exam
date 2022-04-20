@@ -1,3 +1,20 @@
+{#{% extends 'base.html' %}#}
+{##}
+{#{% block page_content %}#}
+{#<h1 class="text-center">Create Your Profile</h1>#}
+{#<div class="row">#}
+{#    <div class="col-lg-3"></div>#}
+{#    <div class="col-lg-6">#}
+{#        <form method="post" action="{% url 'register' %}">#}
+{#            {% csrf_token %}#}
+{#            {{ form }}#}
+{#            <button class="btn btn-primary mt-2" type="submit">Create</button>#}
+{#        </form>#}
+{#    </div>#}
+{#    <div class="col-lg-3"></div>#}
+{#</div>#}
+{#{% endblock %}#}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,18 +37,20 @@
     <!-- Responsive-->
     <link rel="stylesheet" href="/static/css/responsive.css">
     <!-- fevicon -->
-    <link rel="icon" href="/static/images/fevicon.png" type="image/gif"/>
+    <link rel="icon" href="/static/images/favicon.png" type="image/gif"/>
     <!-- Scrollbar Custom CSS -->
     <link rel="stylesheet" href="/static/css/jquery.mCustomScrollbar.min.css">
     <!-- Tweaks for older IEs-->
-        <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
-    media="screen">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+          media="screen">
+    {#    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">#}
+    {#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">#}
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
 </head>
-<!-- body -->
+
 
 <body class="main-layout">
 <!-- loader  -->
@@ -50,7 +69,7 @@
                         <div class="full">
                             <div class="center-desk">
                                 <div class="logo">
-                                    <a href="index.html"><img src="/static/images/logo.png" alt="#"/></a>
+                                    <a href="home"><img src="/static/images/logo.png" alt="#"/></a>
                                 </div>
                             </div>
                         </div>
@@ -60,14 +79,14 @@
                             <div class="limit-box">
                                 <nav class="main-menu">
                                     <ul class="menu-area-main">
-                                        <li class="active"><a href="index.html">Home</a></li>
+                                        <li class="active"><a href="../index.html">Home</a></li>
                                         <li><a href="#casino">Profile</a></li>
                                         <li><a href="#booktable">Book Table</a></li>
 
                                         <li><a href="#casino">Show avaiable players</a></li>
                                         <li><a href="#booktable">Book Table</a></li>
 
-                                        <li><a href="#">Show customer feedback</a></li>
+                                        <li><a href="#">Show customers feedback</a></li>
 
 
                                         <li class="mean-last">
@@ -81,39 +100,27 @@
                 </div>
             </div>
         </div>
-        <!-- end header inner -->
 
-        <!-- end header -->
-
-        {% block page_content %}
-            <section class="slider_section">
-                <div class="banner_main">
-
-                    <div class="container">
-
-                        <div class="row">
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 ">
-                                <div class="text-bg">
-                                    <h1>Welcome to <br> <strong class="b_bold">Dobri's casino </strong></h1>
-                                    <span> Gambling can make your addicted!!! </span>
-                                    <a href="#">Login</a> <a href="#">Register</a>
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <div class="text-img">
-                                    <figure><img src="/static/images/img.png"/></figure>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <section class="slider_section">
+            <h1 class="text-center">Create Your Profile</h1>
+            <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
+                    <form method="post" action="{% url 'register' %}">
+                        {% csrf_token %}
+                        {{ form }}
+                        <button class="btn btn-primary mt-2" type="submit">Create</button>
+                    </form>
                 </div>
-                {#    </div>#}
-            </section>
+                <div class="col-lg-3"></div>
             </div>
+        </section>
 
-            </header>
-
-        {% endblock %}
+    </div>
+</header>
+<!-- end header inner -->
+{% block page_content %}
+{% endblock %}
 
 <!--  footer -->
 <footer>
@@ -132,16 +139,11 @@
                             <li>
                                 <img src="/static/icon/3.png" alt="#"/>Germany
                             </li>
-
-
                         </ul>
                     </div>
                 </div>
-
-
             </div>
         </div>
-
     </div>
 
 
@@ -156,6 +158,8 @@
 <!-- sidebar -->
 <script src="/static/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="/static/js/custom.js"></script>
+
 </body>
+
 
 </html>

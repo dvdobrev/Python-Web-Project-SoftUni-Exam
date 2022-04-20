@@ -1,7 +1,6 @@
 from django.urls import path
 
-from poker_app.accounts.views import DashboardView
-from poker_app.web.views import HomeView, CreateTableView, get_all_tables
+from poker_app.web.views import HomeView, CreateTableView, get_all_tables, DashboardView
 
 urlpatterns = (
     path('', HomeView.as_view(), name='home page'),

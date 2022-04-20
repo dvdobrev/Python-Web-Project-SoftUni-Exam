@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+    <h1 class="text-center">Edit Your Profile</h1>
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <form method="post" action="{% url 'edit profile' %}">
+                {{ form }}
+                {% csrf_token %}
+
+                <button class="btn btn-primary mt-2" type="submit">Edit</button>
+            </form>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+
+
+
+
+                {#                <p class="mt-2">Total Images: {{ total_pet_photos_count }}</p>#}
+                {#                <p class="mt-2">Total Likes: {{ total_likes_count }}</p>#}
+                {#                {% if is_owner %}#}
+{#                <a href="{% url 'edit profile' %}" class="btn btn-primary">Edit</a>#}
+{#                <a href="{% url 'delete profile' %}" class="btn btn-danger">Delete</a>#}
+                {#                {% endif %}#}
+
+
+
+{% endblock %}

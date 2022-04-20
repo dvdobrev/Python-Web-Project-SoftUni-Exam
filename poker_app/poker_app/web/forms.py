@@ -9,22 +9,18 @@ UserModel = get_user_model()
 
 
 class CreateProfileForm(BootstrapFormMixin, auth_forms.UserCreationForm):
-    first_name = forms.CharField(
-        max_length=Profile.FIRST_NAME_MAX_LENGTH,
-    )
-    last_name = forms.CharField(
-        max_length=Profile.LAST_NAME_MAX_LENGTH,
-    )
-    picture = forms.URLField()
-    date_of_birth = forms.DateField()
-    slogan = forms.CharField(
-        widget=forms.Textarea,
-    )
-    email = forms.EmailField()
-
-    # gender = forms.ChoiceField(
-    #     choices=Profile.GENDERS,
+    # first_name = forms.CharField(
+    #     max_length=Profile.FIRST_NAME_MAX_LENGTH,
     # )
+    # last_name = forms.CharField(
+    #     max_length=Profile.LAST_NAME_MAX_LENGTH,
+    # )
+    # picture = forms.URLField()
+    # date_of_birth = forms.DateField()
+    # slogan = forms.CharField(
+    #     widget=forms.Textarea,
+    # )
+    email = forms.EmailField()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -34,13 +30,12 @@ class CreateProfileForm(BootstrapFormMixin, auth_forms.UserCreationForm):
         user = super().save(commit=commit)
 
         profile = Profile(
-            first_name=self.cleaned_data['first_name'],
-            last_name=self.cleaned_data['last_name'],
-            picture=self.cleaned_data['picture'],
-            date_of_birth=self.cleaned_data['date_of_birth'],
-            slogan=self.cleaned_data['slogan'],
+            # first_name=self.cleaned_data['first_name'],
+            # last_name=self.cleaned_data['last_name'],
+            # picture=self.cleaned_data['picture'],
+            # date_of_birth=self.cleaned_data['date_of_birth'],
+            # slogan=self.cleaned_data['slogan'],
             email=self.cleaned_data['email'],
-            # gender=self.cleaned_data['gender'],
             user=user,
         )
 
@@ -50,30 +45,32 @@ class CreateProfileForm(BootstrapFormMixin, auth_forms.UserCreationForm):
 
     class Meta:
         model = UserModel
-        fields = ('username', 'first_name', 'last_name', 'password1', 'password2', 'picture', 'slogan')
-        widgets = {
-            'first_name': forms.TextInput(
-                attrs={
-                    'placeholder': 'Enter first name',
-                }
-            ),
-            'last_name': forms.TextInput(
-                attrs={
-                    'placeholder': 'Enter last name',
-                }
-            ),
-            'picture': forms.TextInput(
-                attrs={
-                    'placeholder': 'Enter URL',
-                }
-            ),
-        }
+        # fields = ('username', 'first_name', 'last_name', 'password1', 'password2', 'picture', 'slogan')
+        fields = ('username', 'password1', 'password2')
+
+        # widgets = {
+        #     'first_name': forms.TextInput(
+        #         attrs={
+        #             'placeholder': 'Enter first name',
+        #         }
+        #     ),
+        #     'last_name': forms.TextInput(
+        #         attrs={
+        #             'placeholder': 'Enter last name',
+        #         }
+        #     ),
+        #     'picture': forms.TextInput(
+        #         attrs={
+        #             'placeholder': 'Enter URL',
+        #         }
+        #     ),
+        # }
 
 
 #
 #
-class CreateTableForm(BootstrapFormMixin, forms.ModelForm):
-
+# TODO: 'add BootstrapFormMixin to the createtableform'
+class CreateTableForm(forms.ModelForm):
     # def __init__(self, user, *args, **kwargs):
     #     super().__init__(*args, **kwargs)
     #     self.user = user

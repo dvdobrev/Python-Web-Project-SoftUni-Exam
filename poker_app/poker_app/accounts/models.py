@@ -50,34 +50,34 @@ class Profile(models.Model):
     DO_NOT_SHOW = 'Do not show'
 
     GENDERS = [(x, x) for x in (MALE, FEMALE, DO_NOT_SHOW)]
-
-    first_name = models.CharField(
-        max_length=FIRST_NAME_MAX_LENGTH,
-        validators=(
-            MinLengthValidator(FIRST_NAME_MIN_LENGTH),
-            validate_only_letters,
-        )
-    )
-
-    last_name = models.CharField(
-        max_length=LAST_NAME_MAX_LENGTH,
-        validators=(
-            MinLengthValidator(LAST_NAME_MIN_LENGTH),
-            validate_only_letters,
-        )
-    )
-
-    picture = models.URLField()
-
-    date_of_birth = models.DateField(
-        null=True,
-        blank=True,
-    )
-
-    slogan = models.TextField(
-        null=True,
-        blank=True,
-    )
+    #
+    # first_name = models.CharField(
+    #     max_length=FIRST_NAME_MAX_LENGTH,
+    #     validators=(
+    #         MinLengthValidator(FIRST_NAME_MIN_LENGTH),
+    #         validate_only_letters,
+    #     )
+    # )
+    #
+    # last_name = models.CharField(
+    #     max_length=LAST_NAME_MAX_LENGTH,
+    #     validators=(
+    #         MinLengthValidator(LAST_NAME_MIN_LENGTH),
+    #         validate_only_letters,
+    #     )
+    # )
+    #
+    # picture = models.URLField()
+    #
+    # date_of_birth = models.DateField(
+    #     null=True,
+    #     blank=True,
+    # )
+    #
+    # slogan = models.TextField(
+    #     null=True,
+    #     blank=True,
+    # )
 
     email = models.EmailField(
         null=True,

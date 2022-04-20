@@ -12,10 +12,16 @@ class HomeView(views.TemplateView):
     # template_name = 'base.html'
 
 
+class DashboardView(views.ListView):
+    model = Table
+    template_name = 'dashboard.html'
+    # context_object_name = 'pet_photos'
+
+
 class CreateTableView(views.CreateView):
     template_name = 'create-table.html'
     form_class = CreateTableForm
-    success_url = reverse_lazy('dashboard')
+    success_url = reverse_lazy('all tables page')
 
     # def get_form_kwargs(self):
     #     kwargs = super().get_form_kwargs()
