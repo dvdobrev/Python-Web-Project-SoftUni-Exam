@@ -11,22 +11,22 @@ UserModel = get_user_model()
 #
 #
 # TODO: 'add BootstrapFormMixin to the createtableform'
-class CreateTableForm(forms.ModelForm):
-    # def __init__(self, user, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.user = user
-    #     self._init_bootstrap_form_controls()
-    #
-    # def save(self, commit=True):
-    #     # commit false does not persist to database
-    #     # just returns the object to be created
-    #     table = super().save(commit=False)
-    #
-    #     table.user = self.user
-    #     if commit:
-    #         table.save()
-    #
-    #     return table
+class CreateTableForm(forms.ModelForm, BootstrapFormMixin):
+    def __init__(self, user, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.user = user
+        self._init_bootstrap_form_controls()
+
+    def save(self, commit=True):
+        # commit false does not persist to database
+        # just returns the object to be created
+        table = super().save(commit=False)
+
+        table.user = self.user
+        if commit:
+            table.save()
+
+        return table
 
     class Meta:
         model = Table
@@ -48,9 +48,9 @@ class CreateTableForm(forms.ModelForm):
 
 class EditTableForm(BootstrapFormMixin, forms.ModelForm):
 
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self._init_bootstrap_form_controls()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._init_bootstrap_form_controls()
 
     class Meta:
         model = Table

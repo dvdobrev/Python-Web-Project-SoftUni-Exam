@@ -23,18 +23,21 @@ class CreateTableView(views.CreateView):
     form_class = CreateTableForm
     success_url = reverse_lazy('all tables page')
 
-    # def get_form_kwargs(self):
-    #     kwargs = super().get_form_kwargs()
-    #     kwargs['user'] = self.request.user
-    #     return kwargs
-
-
-#
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        # kwargs['user_id'] = self.request.user.id
+        return kwargs
 
 
 class EditTableView(views.UpdateView):
+    model = Table
     template_name = 'edit-table.html'
     form_class = EditTableForm
+    success_url = reverse_lazy('all tables page')
+
+    # def get_object(self):
+    #     return self.request.user
 
 
 def get_all_tables(request):

@@ -2,8 +2,6 @@ from django.contrib.auth import get_user_model
 from django.core.validators import MaxValueValidator
 from django.db import models
 
-# from poker_app.accounts.models import UserModel
-
 UserModel = get_user_model()
 
 
@@ -20,10 +18,9 @@ class Table(models.Model):
         )
     )
 
-    # user = models.ForeignKey(
-    #     UserModel,
-    #     on_delete=models.CASCADE,
-    #     # primary_key=True,
-    # )
+    user = models.ForeignKey(
+        UserModel,
+        on_delete=models.CASCADE,
+        # primary_key=True,
+    )
 
-    # USERNAME_FIELD = 'username'
