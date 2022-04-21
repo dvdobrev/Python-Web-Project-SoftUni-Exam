@@ -1,13 +1,12 @@
 from django.shortcuts import render
 from django.views import generic as views
-from django.contrib.auth import views as auth_views
+from django.contrib.auth import views as auth_views, login
 
 # Create your views here.
 from django.urls import reverse_lazy
 
-from poker_app.accounts.forms import EditProfileForm
+from poker_app.accounts.forms import EditProfileForm, CreateProfileForm
 from poker_app.accounts.models import Profile
-from poker_app.web.forms import CreateProfileForm
 from poker_app.web.models import Table
 from poker_app.web.views_mixin import RedirectToHomePage
 
@@ -18,6 +17,13 @@ class UserRegisterView(views.CreateView):
     form_class = CreateProfileForm
     template_name = 'accounts/register.html'
     success_url = reverse_lazy('home page')
+
+    def form_valid(self, *args, **kwargs):
+        result = super().form_valid(*args, **kwargs)
+        # user => self.object
+        # request = self.request
+        login(self.request, self.object)
+        return result
 
 
 class UserLoginView(auth_views.LoginView):
@@ -31,43 +37,40 @@ class UserLoginView(auth_views.LoginView):
 
 
 class EditProfileView(views.UpdateView):
-    template_name = 'accounts/profile_edit.html'
+    template_name = 'accounts/profile-edit.html'
     form_class = EditProfileForm
 
 
-def show_profile(request):
-    profile = Profile.objects.all()[0]
+class ProfileDetailsView(views.DetailView):
+    model = Profile
+    template_name = 'accounts/profile-details.html'
+    context_object_name = 'profile'
 
-    context = {
-        'profile': profile,
-    }
-    return render(request, 'accounts/profile-details.html', context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # self.object is a Profile instance
+        tables = list(Table.objects.filter(id=self.object.user_id))
+        #
+        #     # pet_photos = PetPhoto.objects \
+        #     #     .filter(tagged_pets__in=pets) \
+        #     #     .distinct()
+        #
+        #     # total_likes_count = sum(pp.likes for pp in pet_photos)
+        #     # total_pet_photos_count = len(pet_photos)
+        #
+        #     context.update({
+        #         # 'total_likes_count': total_likes_count,
+        #         # 'total_pet_photos_count': total_pet_photos_count,
+        #         'is_owner': self.object.user_id == self.request.user.id,
+        #         'tables': tables,
+        #     })
+        #
+        return context
 
-# class ProfileDetailsView(views.DetailView):
-#     model = Profile
-#     template_name = 'accounts/profile-details.html'
-#     context_object_name = 'profile'
-
-# def get_queryset(self):
-#     pass
+# def show_profile(request):
+#     profile = Profile.objects.all()[0]
 #
-# def get_context_data(self, **kwargs):
-#     context = super().get_context_data(**kwargs)
-#     # self.object is a Profile instance
-#     tables = list(Table.objects.filter(user_id=self.object.user_id))
-#     #
-#     #     # pet_photos = PetPhoto.objects \
-#     #     #     .filter(tagged_pets__in=pets) \
-#     #     #     .distinct()
-#     #
-#     #     # total_likes_count = sum(pp.likes for pp in pet_photos)
-#     #     # total_pet_photos_count = len(pet_photos)
-#     #
-#     #     context.update({
-#     #         # 'total_likes_count': total_likes_count,
-#     #         # 'total_pet_photos_count': total_pet_photos_count,
-#     #         'is_owner': self.object.user_id == self.request.user.id,
-#     #         'tables': tables,
-#     #     })
-#     #
-#     return context
+#     context = {
+#         'profile': profile,
+#     }
+#     return render(request, 'accounts/profile-details.html', context)

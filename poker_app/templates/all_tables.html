@@ -116,18 +116,19 @@
                                     <div class="tables-container">
 
 
-{#                                        <img src="{{ exp.image }}" alt="{{ exp.description }}">#}
-{##}
-{#                                        {% if exp.description %}#}
-{#                                            <p>{{ exp.description }}</p>#}
-{#                                        {% endif %}#}
+                                        {#                                        <img src="{{ exp.image }}" alt="{{ exp.description }}">#}
+                                        {##}
+                                        {#                                        {% if exp.description %}#}
+                                        {#                                            <p>{{ exp.description }}</p>#}
+                                        {#                                        {% endif %}#}
 
                                         <div class="tables-detail">
                                             <div class="right">
 
-                                                {#                                                <a class="button edit" href="{% url 'edit expense' exp.pk %}">Edit</a>#}
-                                                {##}
-                                                {#                                                <a class="button delete" href="#{% url 'delete expense' exp.pk %}">Delete</a>#}
+                                                <a class="button edit"
+                                                   href="{% url 'edit table page' table.pk %}">Edit</a>
+
+                                                <a class="button delete" href="#">Delete</a>
                                             </div>
                                         </div>
                                     </div>

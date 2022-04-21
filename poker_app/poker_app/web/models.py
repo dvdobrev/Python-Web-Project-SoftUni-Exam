@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.core.validators import MaxValueValidator
 from django.db import models
 
-from poker_app.accounts.models import UserModel
+# from poker_app.accounts.models import UserModel
 
 UserModel = get_user_model()
 

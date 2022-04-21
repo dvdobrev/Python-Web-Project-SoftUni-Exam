@@ -63,11 +63,12 @@
                                 <nav class="main-menu">
                                     <ul class="menu-area-main">
                                         <li class="active"><a href="{% url 'home page' %}">Home</a></li>
-                                        <li><a href="#casino">Profile</a></li>
-{#                                        <li><a href="#booktable">Book Table</a></li>#}
+                                        {#                                        {% if is_authenticated %}#}
+                                        <li><a href="{% url 'profile details page' request.user.id %}">Profile</a></li>
+
+                                        {#                                        {% endif %}#}
 
                                         <li><a href="#casino">Show avaiable players</a></li>
-{#                                        <li><a href="#booktable">Book Table</a></li>#}
 
                                         <li><a href="#">Show customers feedback</a></li>
 
@@ -94,7 +95,8 @@
                             <div class="text-bg">
                                 <h1>Wanna<br> <strong class="b_bold">Play </strong></h1>
                                 <span> Gambling can make your addicted!!! </span>
-                                <a href="{% url 'create table page' %}">Create Table</a> <a href="{% url 'register' %}">Join Table</a>
+                                <a href="{% url 'create table page' %}">Create Table</a>
+                                <a href="{% url 'all tables page' %}">Join Table</a>
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">

@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import generic as views
 
-from poker_app.web.forms import CreateTableForm
+from poker_app.web.forms import CreateTableForm, EditTableForm
 from poker_app.web.models import Table
 
 
@@ -30,6 +30,13 @@ class CreateTableView(views.CreateView):
 
 
 #
+
+
+class EditTableView(views.UpdateView):
+    template_name = 'edit-table.html'
+    form_class = EditTableForm
+
+
 def get_all_tables(request):
     tables = Table.objects.all()
 

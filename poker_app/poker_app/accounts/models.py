@@ -1,4 +1,7 @@
+from cProfile import Profile
+
 from django.contrib.auth import models as auth_models, get_user_model
+
 from django.core.validators import MinLengthValidator, MaxValueValidator
 
 from django.db import models
@@ -12,13 +15,14 @@ from poker_app.web.validators import validate_only_letters
 3. Create user manager
 '''
 
-UserModel = get_user_model()
+
+# UserModel = get_user_model()   ----> because of this a got the error for the AUTH_USER_MODEL!!! Be aware
 
 
 # TODO: 'ADD auth_models.PermissionsMixin to the PokerUser'
 
 
-class PokerUser(auth_models.AbstractBaseUser):  # auth_models.PermissionsMixin
+class PokerUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):  # auth_models.PermissionsMixin
     USERNAME_MAX_LENGTH = 25
 
     username = models.CharField(
@@ -34,6 +38,7 @@ class PokerUser(auth_models.AbstractBaseUser):  # auth_models.PermissionsMixin
         default=False,
     )
 
+    # which attribute should be use bei log in
     USERNAME_FIELD = 'username'
 
     objects = PokerUserManager()
@@ -41,9 +46,9 @@ class PokerUser(auth_models.AbstractBaseUser):  # auth_models.PermissionsMixin
 
 class Profile(models.Model):
     FIRST_NAME_MIN_LENGTH = 2
-    FIRST_NAME_MAX_LENGTH = 30
+    FIRST_NAME_MAX_LENGTH = 20
     LAST_NAME_MIN_LENGTH = 2
-    LAST_NAME_MAX_LENGTH = 30
+    LAST_NAME_MAX_LENGTH = 20
 
     #
     # first_name = models.CharField(
@@ -79,13 +84,11 @@ class Profile(models.Model):
         blank=True,
     )
 
-    # user = models.OneToOneField(
-    #     PokerUser,
-    #     on_delete=models.CASCADE,
-    #     # primary_key=True,
-    # )
+    user = models.OneToOneField(
+        PokerUser,
+        on_delete=models.CASCADE,
+        # primary_key=True,
+    )
 
     # def __str__(self):
     #     return f'{self.first_name} {self.last_name}'
-
-
