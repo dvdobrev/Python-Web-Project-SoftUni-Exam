@@ -55,3 +55,23 @@ class EditTableForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = Table
         fields = '__all__'
+
+
+class DisabledFieldsFormMixin:
+    pass
+
+
+class DeleteTableForm(forms.ModelForm, BootstrapFormMixin, DisabledFieldsFormMixin):
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self._init_bootstrap_form_controls()
+    #     self._init_disabled_fields()
+
+    def save(self, commit=True):
+        self.instance.delete()
+        return self.instance
+
+    class Meta:
+        model = Table
+        fields = ()
+        # fields = "__all__"

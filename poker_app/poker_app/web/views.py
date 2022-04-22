@@ -2,7 +2,8 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import generic as views
 
-from poker_app.web.forms import CreateTableForm, EditTableForm
+from poker_app.web.forms import CreateTableForm, EditTableForm, DeleteTableForm
+
 from poker_app.web.models import Table
 
 
@@ -40,6 +41,17 @@ class EditTableView(views.UpdateView):
     #     return self.request.user
 
 
+class DeleteTableView(views.DeleteView):
+    # def get_queryset(self):
+    #     table = super().get_queryset().filter(table=self.request.id)
+    #     return table
+
+    model = Table
+    template_name = 'delete-table.html'
+    form_class = DeleteTableForm
+    success_url = reverse_lazy('all tables page')
+
+
 def get_all_tables(request):
     tables = Table.objects.all()
 
@@ -51,6 +63,3 @@ def get_all_tables(request):
     }
 
     return render(request, 'all_tables.html', context)
-
-# class AllTablesView(views.ListView):
-#
