@@ -26,13 +26,19 @@ class UserRegisterView(views.CreateView):
 
 
 class UserLoginView(auth_views.LoginView):
-    template_name = 'accounts/login.html'
+    template_name = 'accounts/login-page.html'
     success_url = reverse_lazy('dashboard')
 
     def get_success_url(self):
         if self.success_url:
             return self.success_url
         return super().get_success_url()
+
+
+class UserLogoutView(auth_views.LogoutView):
+    # template_name = 'accounts/logout-page.html'
+    # success_url = reverse_lazy('home page')
+    pass
 
 
 class ProfileEditView(views.UpdateView):

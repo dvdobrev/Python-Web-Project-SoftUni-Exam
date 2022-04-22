@@ -43,6 +43,7 @@
 <!-- end loader -->
 <!-- header -->
 <header>
+    <h1>{{ request.user }}</h1>
     <!-- header inner -->
     <div class="header-top">
         <div class="header">
@@ -62,12 +63,12 @@
                             <div class="limit-box">
                                 <nav class="main-menu">
                                     <ul class="menu-area-main">
-{#                                        <li class="active"><a href="index.html">Home</a></li>#}
-{#                                        <li><a href="#casino">Profile</a></li>#}
-{#                                        <li><a href="#booktable">Book Table</a></li>#}
+                                        {#                                        <li class="active"><a href="index.html">Home</a></li>#}
+                                        {#                                        <li><a href="#casino">Profile</a></li>#}
+                                        {#                                        <li><a href="#booktable">Book Table</a></li>#}
 
                                         <li><a href="{% url 'all tables page' %}">Show avaiable tables</a></li>
-{#                                        <li><a href="#">Show customers feedback</a></li>#}
+                                        {#                                        <li><a href="#">Show customers feedback</a></li>#}
 
 
                                         <li class="mean-last">
@@ -108,6 +109,8 @@
     </div>
 </header>
 <!-- end header inner -->
+
+
 {% block page_content %}
 {% endblock %}
 

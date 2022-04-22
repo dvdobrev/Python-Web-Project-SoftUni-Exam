@@ -130,5 +130,7 @@ STATICFILES_DIRS = (
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+LOGOUT_REDIRECT_URL = 'home page'
+
 AUTH_USER_MODEL = 'accounts.PokerUser'
 # AUTH_USER_MODEL = 'users.ModelUser'

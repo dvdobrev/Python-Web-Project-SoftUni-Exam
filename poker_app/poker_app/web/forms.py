@@ -1,15 +1,11 @@
 from django import forms
-from django.contrib.auth import forms as auth_forms, get_user_model
 
-from poker_app.accounts.models import Profile
 from poker_app.web.helpers import BootstrapFormMixin
 from poker_app.web.models import Table
 
-UserModel = get_user_model()
+# UserModel = get_user_model()
 
 
-#
-#
 # TODO: 'add BootstrapFormMixin to the createtableform'
 class CreateTableForm(forms.ModelForm, BootstrapFormMixin):
     def __init__(self, user, *args, **kwargs):

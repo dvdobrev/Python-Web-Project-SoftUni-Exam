@@ -89,12 +89,6 @@ class DeleteProfileForm(forms.ModelForm, BootstrapFormMixin, DisabledFieldsFormM
         self.instance.delete()
         return self.instance
 
-    # def delete_user(self):
-    #     user = User.objects.get(username=self.username)
-    #     user.delete()
-    #
-    #     return user
-
     class Meta:
         model = Profile
         fields = ()

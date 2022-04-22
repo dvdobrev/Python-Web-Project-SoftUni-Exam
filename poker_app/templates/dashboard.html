@@ -42,6 +42,9 @@
 </div>
 <!-- end loader -->
 <!-- header -->
+<h1>{{ request.user }}</h1>
+
+
 <header>
     <!-- header inner -->
     <div class="header-top">
@@ -67,6 +70,9 @@
                                         <li><a href="{% url 'profile details page' request.user.id %}">Profile</a></li>
 
                                         {#                                        {% endif %}#}
+
+                                        <li class="active"><a href="{% url 'logout page' %}">Logout</a></li>
+
 
                                         <li><a href="#casino">Show avaiable players</a></li>
 
