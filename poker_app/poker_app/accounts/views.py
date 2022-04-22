@@ -1,17 +1,16 @@
-from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect, render
 from django.views import generic as views
 from django.contrib.auth import views as auth_views, login
 
-# Create your views here.
 from django.urls import reverse_lazy
 
-from poker_app.accounts.forms import EditProfileForm, CreateProfileForm
-from poker_app.accounts.models import Profile
-from poker_app.web.models import Table
-from poker_app.web.views_mixin import RedirectToHomePage
-
+from poker_app.accounts.forms import EditProfileForm, CreateProfileForm, DeleteProfileForm
+from poker_app.accounts.models import Profile, PokerUser
 
 # TODO: 'add RedirectToHomePage to the UserRegisterView'
+from poker_app.web.models import Table
+
 
 class UserRegisterView(views.CreateView):
     form_class = CreateProfileForm
@@ -36,41 +35,63 @@ class UserLoginView(auth_views.LoginView):
         return super().get_success_url()
 
 
-class EditProfileView(views.UpdateView):
+class ProfileEditView(views.UpdateView):
+    model = Profile
     template_name = 'accounts/profile-edit.html'
     form_class = EditProfileForm
+    context_object_name = 'profile'
+    success_url = reverse_lazy('dashboard')
 
 
 class ProfileDetailsView(views.DetailView):
     model = Profile
     template_name = 'accounts/profile-details.html'
     context_object_name = 'profile'
+    success_url = reverse_lazy('profile details page')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # self.object is a Profile instance
-        tables = list(Table.objects.filter(id=self.object.user_id))
-        #
-        #     # pet_photos = PetPhoto.objects \
-        #     #     .filter(tagged_pets__in=pets) \
-        #     #     .distinct()
-        #
-        #     # total_likes_count = sum(pp.likes for pp in pet_photos)
-        #     # total_pet_photos_count = len(pet_photos)
-        #
-        #     context.update({
-        #         # 'total_likes_count': total_likes_count,
-        #         # 'total_pet_photos_count': total_pet_photos_count,
-        #         'is_owner': self.object.user_id == self.request.user.id,
-        #         'tables': tables,
-        #     })
-        #
+        tables = list(Table.objects.filter(user_id=self.object.user_id))
+
+        context.update({
+            # 'total_likes_count': total_likes_count,
+            # 'total_pet_photos_count': total_pet_photos_count,
+            'is_owner': self.object.user_id == self.request.user.id,
+            'tables': tables,
+        })
+
         return context
 
-# def show_profile(request):
-#     profile = Profile.objects.all()[0]
+
+class ProfileDeleteView(views.DeleteView):
+    model = PokerUser
+    template_name = 'accounts/profile-delete.html'
+    form_class = DeleteProfileForm
+    success_url = reverse_lazy('home page')
+
+    #
+    # def get_object(self, queryset=None):
+    #     profile_object = super(ProfileDeleteView, self).get_object()
+    #     return profile_object
+
+# def delete_profile(request):
+#     return profile_action(request, DeleteProfileForm, 'index', get_profile(), 'main/profile_delete.html')
+
+#
+# @login_required
+# def delete_profile(request, pk):
+#     if request.method == 'POST':
+#         delete_form = DeleteProfileForm(request.POST, instance=request.user)
+#         user = request.user
+#         user.delete()
+#         # messages.info(request, 'Your account has been deleted.')
+#         return redirect('home page')
+#     else:
+#         delete_form = DeleteProfileForm(instance=request.user)
 #
 #     context = {
-#         'profile': profile,
+#         'delete_form': delete_form
 #     }
-#     return render(request, 'accounts/profile-details.html', context)
+#
+#     return render(request, 'accounts/profile-delete.html', context)

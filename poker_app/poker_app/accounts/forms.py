@@ -1,7 +1,10 @@
 from django import forms
 
 from django.contrib.auth import forms as auth_forms, get_user_model
+from django.contrib.auth.models import User
+
 from poker_app.accounts.models import Profile
+from poker_app.web.forms import DisabledFieldsFormMixin
 from poker_app.web.helpers import BootstrapFormMixin
 
 UserModel = get_user_model()
@@ -66,16 +69,6 @@ class CreateProfileForm(BootstrapFormMixin, auth_forms.UserCreationForm):
         # }
 
 
-# class EditProfileForm(BootstrapFormMixin, forms.ModelForm):
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self._init_bootstrap_form_controls()
-#
-#     class Meta:
-#         model = Profile
-#         fields = "__all__"
-
-
 class EditProfileForm(BootstrapFormMixin, forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -84,3 +77,25 @@ class EditProfileForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = Profile
         fields = "__all__"
+
+
+class DeleteProfileForm(forms.ModelForm, BootstrapFormMixin, DisabledFieldsFormMixin):
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self._init_bootstrap_form_controls()
+    #     self._init_disabled_fields()
+
+    def save(self, commit=True):
+        self.instance.delete()
+        return self.instance
+
+    # def delete_user(self):
+    #     user = User.objects.get(username=self.username)
+    #     user.delete()
+    #
+    #     return user
+
+    class Meta:
+        model = Profile
+        fields = ()
+        # fields = "__all__"
