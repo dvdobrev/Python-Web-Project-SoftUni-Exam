@@ -43,7 +43,6 @@
 <!-- end loader -->
 <!-- header -->
 <header>
-    <h1>{{ request.user }}</h1>
     <!-- header inner -->
     <div class="header-top">
         <div class="header">
@@ -53,7 +52,7 @@
                         <div class="full">
                             <div class="center-desk">
                                 <div class="logo">
-                                    <a href="index.html"><img src="/static/images/logo.png" alt="#"/></a>
+                                    <a href="../index.html"><img src="/static/images/logo.png" alt="#"/></a>
                                 </div>
                             </div>
                         </div>
@@ -63,12 +62,12 @@
                             <div class="limit-box">
                                 <nav class="main-menu">
                                     <ul class="menu-area-main">
-                                        <li class="active"><a href="index.html">Home</a></li>
+                                        <li class="active"><a href="../index.html">Home</a></li>
                                         <li><a href="#casino">Profile</a></li>
-                                        {#                                        <li><a href="#booktable">Book Table</a></li>#}
+                                        <li><a href="#booktable">Book Table</a></li>
 
                                         <li><a href="#casino">Show avaiable players</a></li>
-                                        {#                                        <li><a href="#booktable">Book Table</a></li>#}
+                                        <li><a href="#booktable">Book Table</a></li>
 
                                         <li><a href="#">Show customers feedback</a></li>
 
@@ -84,7 +83,6 @@
                 </div>
             </div>
         </div>
-
         <section class="slider_section">
             <div class="banner_main">
 
@@ -92,13 +90,21 @@
 
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 ">
-                            <form method="post" action="{% url 'create table page' %}">
-                                {% csrf_token %}
-                                {{ form }}
-                                <button class="btn btn-primary mt-2" type="submit">Create</button>
-                            </form>
-                        </div>
+                            <div class="text-bg">
 
+                                {% for game in games %}
+                                    <h1>Game Type: {{ game.game_type }}</h1>
+{#                                    <h1>Max Players: {{ game.max_players }}</h1>#}
+
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <div class="text-img">
+                                <figure><img src="/static/images/img.png"/></figure>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

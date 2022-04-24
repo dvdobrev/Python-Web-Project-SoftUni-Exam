@@ -13,7 +13,7 @@
 {#</div>#}
 
 
-<form method="post" action="{% url 'edit table page' table.user_id %}">
+<form method="post" action="{% url 'edit room page' room.pk %}">
     {% csrf_token %}
     {{ form }}
 

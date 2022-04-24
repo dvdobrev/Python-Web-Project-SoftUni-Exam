@@ -1,16 +1,18 @@
 from django.urls import path
 
-from poker_app.web.views import HomeView, CreateTableView, get_all_tables, DashboardView, EditTableView, DeleteTableView
+from poker_app.games.views import CreateGameView
+from poker_app.web.views import HomeView, CreateRoomView, get_all_rooms, DashboardView, EditRoomView, DeleteRoomView
 
 urlpatterns = (
     path('', HomeView.as_view(), name='home page'),
     path('dashboard/', DashboardView.as_view(), name='dashboard'),
 
-    path('table/create/', CreateTableView.as_view(), name='create table page'),
-    path('table/edit/<int:pk>/', EditTableView.as_view(), name='edit table page'),
-    path('table/delete/<int:pk>/', DeleteTableView.as_view(), name='delete table page'),
-    path('table/delete/<int:pk>/', DeleteTableView.as_view(), name='delete table page'),
+    path('room/create/', CreateRoomView.as_view(), name='create room page'),
+    path('room/edit/<int:pk>/', EditRoomView.as_view(), name='edit room page'),
+    path('room/delete/<int:pk>/', DeleteRoomView.as_view(), name='delete room page'),
+    # path('table/delete/<int:pk>/', DeleteRoomView.as_view(), name='delete table page'),
 
-    path('table/all-tables/', get_all_tables, name='all tables page'),
+    path('room/all-rooms/', get_all_rooms, name='all rooms page'),
+
 
 )

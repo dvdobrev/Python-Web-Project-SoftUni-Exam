@@ -2251,7 +2251,7 @@ hr {
     text-decoration: underline;
 }
 
-.tables-detail {
+.room-detail {
     display: flex;
     justify-content: space-between;
 }

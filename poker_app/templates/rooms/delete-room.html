@@ -1,13 +1,13 @@
 <h1 class="text-center">Are you sure you want to delete the table {{ table.name }}?</h1>
 
 
-<form method="post" action="{% url 'delete table page' table.pk %}">
+<form method="post" action="{% url 'delete room page' room.pk %}">
     {% csrf_token %}
     {{ form }}
 
     <button class="btn btn-primary mt-2" type="submit">Delete</button>
     <a class="button edit"
-       href="{% url 'all tables page' %}">Go back</a>
+       href="{% url 'all rooms page' %}">Go back</a>
 
 </form>
 

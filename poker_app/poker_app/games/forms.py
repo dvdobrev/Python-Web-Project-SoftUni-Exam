@@ -1,12 +1,10 @@
 from django import forms
 
+from poker_app.games.models import GameType
 from poker_app.web.helpers import BootstrapFormMixin
-from poker_app.web.models import Room
-
-# UserModel = get_user_model()
 
 
-class CreateRoomForm(forms.ModelForm, BootstrapFormMixin):
+class CreateGameForm(forms.ModelForm, BootstrapFormMixin):
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.user = user
@@ -15,40 +13,40 @@ class CreateRoomForm(forms.ModelForm, BootstrapFormMixin):
     def save(self, commit=True):
         # commit false does not persist to database
         # just returns the object to be created
-        room = super().save(commit=False)
+        game = super().save(commit=False)
 
-        room.user = self.user
+        game.user = self.user
         if commit:
-            room.save()
+            game.save()
 
-        return room
+        return game
 
     class Meta:
-        model = Room
+        model = GameType
         fields = '__all__'
-        widgets = {
-            'name': forms.TextInput(
-                attrs={
-                    'placeholder': 'Enter room name',
-                }
-            ),
+        # widgets = {
+        #     'name': forms.TextInput(
+        #         attrs={
+        #             'placeholder': 'Enter room name',
+        #         }
+        #     ),
+        #
+        #     'max_players': forms.TextInput(
+        #         attrs={
+        #             'placeholder': 'Enter max players',
+        #         }
+        #     ),
+        # }
 
-            'max_players': forms.TextInput(
-                attrs={
-                    'placeholder': 'Enter max players',
-                }
-            ),
-        }
 
-
-class EditRoomForm(BootstrapFormMixin, forms.ModelForm):
+class EditGameForm(BootstrapFormMixin, forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._init_bootstrap_form_controls()
 
     class Meta:
-        model = Room
+        model = GameType
         fields = '__all__'
 
 
@@ -56,7 +54,7 @@ class DisabledFieldsFormMixin:
     pass
 
 
-class DeleteRoomForm(forms.ModelForm, BootstrapFormMixin, DisabledFieldsFormMixin):
+class DeleteGameForm(forms.ModelForm, BootstrapFormMixin, DisabledFieldsFormMixin):
     # def __init__(self, *args, **kwargs):
     #     super().__init__(*args, **kwargs)
     #     self._init_bootstrap_form_controls()
@@ -67,6 +65,6 @@ class DeleteRoomForm(forms.ModelForm, BootstrapFormMixin, DisabledFieldsFormMixi
         return self.instance
 
     class Meta:
-        model = Room
+        model = GameType
         fields = ()
         # fields = "__all__"

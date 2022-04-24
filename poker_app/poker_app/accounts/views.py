@@ -9,7 +9,7 @@ from poker_app.accounts.forms import EditProfileForm, CreateProfileForm, DeleteP
 from poker_app.accounts.models import Profile, PokerUser
 
 # TODO: 'add RedirectToHomePage to the UserRegisterView'
-from poker_app.web.models import Table
+from poker_app.web.models import Room
 
 
 class UserRegisterView(views.CreateView):
@@ -58,7 +58,7 @@ class ProfileDetailsView(views.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # self.object is a Profile instance
-        tables = list(Table.objects.filter(user_id=self.object.user_id))
+        tables = list(Room.objects.filter(user_id=self.object.user_id))
 
         context.update({
             # 'total_likes_count': total_likes_count,

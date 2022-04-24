@@ -1,3 +1,20 @@
+{#{% extends 'base.html' %}#}
+{##}
+{#{% block page_content %}#}
+{#<h1 class="text-center">Create Your Profile</h1>#}
+{#<div class="row">#}
+{#    <div class="col-lg-3"></div>#}
+{#    <div class="col-lg-6">#}
+{#        <form method="post" action="{% url 'register' %}">#}
+{#            {% csrf_token %}#}
+{#            {{ form }}#}
+{#            <button class="btn btn-primary mt-2" type="submit">Create</button>#}
+{#        </form>#}
+{#    </div>#}
+{#    <div class="col-lg-3"></div>#}
+{#</div>#}
+{#{% endblock %}#}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,9 +59,6 @@
 </div>
 <!-- end loader -->
 <!-- header -->
-<h1>{{ request.user }}</h1>
-
-
 <header>
     <!-- header inner -->
     <div class="header-top">
@@ -55,7 +69,7 @@
                         <div class="full">
                             <div class="center-desk">
                                 <div class="logo">
-                                    <a href="index.html"><img src="/static/images/logo.png" alt="#"/></a>
+                                    <a href="../index.html"><img src="/static/images/logo.png" alt="#"/></a>
                                 </div>
                             </div>
                         </div>
@@ -65,16 +79,12 @@
                             <div class="limit-box">
                                 <nav class="main-menu">
                                     <ul class="menu-area-main">
-                                        <li class="active"><a href="{% url 'home page' %}">Home</a></li>
-                                        {#                                        {% if is_authenticated %}#}
-                                        <li><a href="{% url 'profile details page' request.user.id %}">Profile</a></li>
-
-                                        {#                                        {% endif %}#}
-
-                                        <li class="active"><a href="{% url 'logout page' %}">Logout</a></li>
-
+                                        <li class="active"><a href="../index.html">Home</a></li>
+                                        <li><a href="#casino">Profile</a></li>
+                                        <li><a href="#booktable">Book Table</a></li>
 
                                         <li><a href="#casino">Show avaiable players</a></li>
+                                        <li><a href="#booktable">Book Table</a></li>
 
                                         <li><a href="#">Show customers feedback</a></li>
 
@@ -90,7 +100,6 @@
                 </div>
             </div>
         </div>
-
         <section class="slider_section">
             <div class="banner_main">
 
@@ -99,10 +108,41 @@
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 ">
                             <div class="text-bg">
-                                <h1>Wanna<br> <strong class="b_bold">Play </strong></h1>
-                                <span> Gambling can make your addicted!!! </span>
-                                <a href="{% url 'create room page' %}">Create Room</a>
-                                <a href="{% url 'all rooms page' %}">Show all Rooms</a>
+
+                                {% for room in rooms %}
+                                    <h1>Room Name: {{ room.name }}</h1>
+                                    <h1>Max Players: {{ room.max_players }}</h1>
+                                    <h1>Min Bet: {{ room.min_bet }}$</h1>
+                                    {#                                    <h2>{{ room.name }}</h2>#}
+                                    <div class="tables-container">
+
+
+                                        {#                                        <img src="{{ exp.image }}" alt="{{ exp.description }}">#}
+                                        {##}
+                                        {#                                        {% if exp.description %}#}
+                                        {#                                            <p>{{ exp.description }}</p>#}
+                                        {#                                        {% endif %}#}
+
+                                        <div class="room-detail">
+                                            <div class="right">
+
+                                                <a href="{% url 'all games page' %}">Show made games in the room</a>
+                                                <a href="{% url 'create game page' %}">Create Game</a>
+
+                                                <a href="{% url 'edit room page' room.pk %}">Edit Room</a>
+                                                <a href="{% url 'delete room page' room.pk %}">Delete Room</a>
+
+                                                {#                                                <a class="button edit"#}
+                                                {#                                                   href="{% url 'edit room page' room.pk %}">Edit</a>#}
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                {% endfor %}
+
+
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
@@ -114,6 +154,24 @@
                 </div>
             </div>
         </section>
+        {#        <section class="slider_section">#}
+        {#            <h1 class="text-center">Create Your Profile</h1>#}
+        {#            <div class="row">#}
+        {#                <div class="col-lg-3"></div>#}
+        {#                <div class="col-lg-6">#}
+        {#                    <form method="post" action="{% url 'all tables page' %}">#}
+        {##}
+        {#                        {% for table in tables %}#}
+        {#                            <h1>Table Name: {{ table.name }}</h1>#}
+        {#                        {% endfor %}#}
+        {#                        {% csrf_token %}#}
+        {#                        {{ form }}#}
+        {#                        <button class="btn btn-primary mt-2" type="submit">Create</button>#}
+        {#                    </form>#}
+        {#                </div>#}
+        {#                <div class="col-lg-3"></div>#}
+        {#            </div>#}
+        {#        </section>#}
 
     </div>
 </header>

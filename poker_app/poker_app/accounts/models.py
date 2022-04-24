@@ -15,6 +15,7 @@ from poker_app.web.validators import validate_only_letters
 3. Create user manager
 '''
 
+
 #
 # UserModel = get_user_model()   #----> because of this a got the error for the AUTH_USER_MODEL!!! Be aware
 
@@ -39,7 +40,7 @@ class PokerUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):  # 
     )
 
     # which attribute should be use bei log in (username or email)
-    USERNAME_FIELD = 'username'     # or email
+    USERNAME_FIELD = 'username'  # or email
 
     objects = PokerUserManager()
 

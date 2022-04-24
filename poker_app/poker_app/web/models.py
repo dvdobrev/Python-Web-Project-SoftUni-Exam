@@ -1,14 +1,20 @@
 from django.contrib.auth import get_user_model
-from django.core.validators import MaxValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
-UserModel = get_user_model()
+
+# UserModel = get_user_model()
 
 
-class Table(models.Model):
+class Room(models.Model):
     MAX_PLAYERS = 5
+    #
+    # TEXAS_HOLEM = 'Texas Holdem'
+    # OMAHA = 'Omaha'
+    #
+    # GAME_TYPES = [(x, x) for x in (TEXAS_HOLEM, OMAHA)]
 
-    name = models.CharField(
+    room_name = models.CharField(
         max_length=10
     )
 
@@ -18,9 +24,17 @@ class Table(models.Model):
         )
     )
 
-    user = models.ForeignKey(
-        UserModel,
-        on_delete=models.CASCADE,
-        # primary_key=True,
-    )
+    min_bet = models.IntegerField()
 
+    # user = models.ForeignKey(
+    #     UserModel,
+    #     on_delete=models.CASCADE,
+    #     # primary_key=True,
+    # )
+    #
+    # game_types = models.CharField(
+    #     max_length=max(len(x) for x, _ in GAME_TYPES),
+    #     choices=GAME_TYPES,
+    #     null=True,
+    #     blank=True,
+    # )
