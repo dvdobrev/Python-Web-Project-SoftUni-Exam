@@ -21,7 +21,7 @@ class DashboardView(views.ListView):
 
 
 class CreateRoomView(views.CreateView, auth_mixins.LoginRequiredMixin):
-    template_name = 'games/../../templates/rooms/create-room.html'
+    template_name = 'rooms/create-room.html'
     form_class = CreateRoomForm
     success_url = reverse_lazy('all rooms page')
 
@@ -34,7 +34,7 @@ class CreateRoomView(views.CreateView, auth_mixins.LoginRequiredMixin):
 
 class EditRoomView(views.UpdateView, auth_mixins.LoginRequiredMixin):
     model = Room
-    template_name = 'games/../../templates/rooms/edit-room.html'
+    template_name = 'rooms/edit-room.html'
     form_class = EditRoomForm
     success_url = reverse_lazy('all rooms page')
 
@@ -53,7 +53,7 @@ class DeleteRoomView(views.DeleteView):
     #     return table
 
     model = Room
-    template_name = 'games/../../templates/rooms/delete-room.html'
+    template_name = 'rooms/delete-room.html'
     form_class = DeleteRoomForm
     success_url = reverse_lazy('all rooms page')
 

@@ -1,7 +1,9 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.db.models import CASCADE
 
 from poker_app.web.models import Room
+
 
 # UserModel = get_user_model()
 
@@ -20,9 +22,13 @@ class GameType(models.Model):
         # default=DO_NOT_SHOW,
     )
 
-    # game_type_in_room = models.ManyToManyField(
-    #     Room,
-    # )
+    start_bet = models.IntegerField()
+    min_step_bet = models.IntegerField()
+    max_bet = models.IntegerField()
+
+    room = models.ForeignKey(
+        Room,
+        on_delete=CASCADE)
     #
     # user = models.ForeignKey(
     #     UserModel,

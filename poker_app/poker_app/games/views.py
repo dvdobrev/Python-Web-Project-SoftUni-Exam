@@ -28,7 +28,7 @@ def get_all_games(request):
     games = GameType.objects.all()
 
     if not games:
-        return redirect('create room page')
+        return redirect('create game page')
 
     context = {
         'games': games,

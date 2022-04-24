@@ -94,7 +94,10 @@
 
                                 {% for game in games %}
                                     <h1>Game Type: {{ game.game_type }}</h1>
-{#                                    <h1>Max Players: {{ game.max_players }}</h1>#}
+                                    <h1>Game Start Bet: {{ game.start_bet }}</h1>
+                                    <h1>Game Min Step : {{ game.min_step_bet }}</h1>
+                                    <h1>Game Max Bet: {{ game.max_bet }}</h1>
+                                    <h1>----------------------------</h1>
 
                                 {% endfor %}
 

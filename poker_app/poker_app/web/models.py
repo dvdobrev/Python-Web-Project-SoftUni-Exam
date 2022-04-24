@@ -7,24 +7,19 @@ from django.db import models
 
 
 class Room(models.Model):
-    MAX_PLAYERS = 5
     #
     # TEXAS_HOLEM = 'Texas Holdem'
     # OMAHA = 'Omaha'
     #
     # GAME_TYPES = [(x, x) for x in (TEXAS_HOLEM, OMAHA)]
 
-    room_name = models.CharField(
+    name = models.CharField(
         max_length=10
     )
 
-    max_players = models.IntegerField(
-        validators=(
-            MaxValueValidator(MAX_PLAYERS),
-        )
-    )
+    max_players = models.IntegerField()
 
-    min_bet = models.IntegerField()
+    # min_bet = models.IntegerField()
 
     # user = models.ForeignKey(
     #     UserModel,

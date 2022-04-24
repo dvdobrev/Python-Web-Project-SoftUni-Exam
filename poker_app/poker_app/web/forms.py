@@ -1,7 +1,9 @@
 from django import forms
 
+from poker_app.games.models import GameType
 from poker_app.web.helpers import BootstrapFormMixin
 from poker_app.web.models import Room
+
 
 # UserModel = get_user_model()
 
@@ -63,6 +65,8 @@ class DeleteRoomForm(forms.ModelForm, BootstrapFormMixin, DisabledFieldsFormMixi
     #     self._init_disabled_fields()
 
     def save(self, commit=True):
+        games = GameType.objects.all()
+        games.delete()
         self.instance.delete()
         return self.instance
 
