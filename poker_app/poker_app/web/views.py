@@ -1,11 +1,9 @@
-from django.contrib.auth import mixins as auth_mixins
 from django.shortcuts import redirect, render
-from django.urls import reverse_lazy
 from django.views import generic as views
 
-from poker_app.web.forms import CreateRoomForm, EditRoomForm, DeleteRoomForm
-
-from poker_app.web.models import Room
+from poker_app.dice.models import Dice
+from poker_app.poker.models import Poker
+from poker_app.roulette.models import Roulette
 
 
 class HomeView(views.TemplateView):
@@ -15,57 +13,27 @@ class HomeView(views.TemplateView):
 
 
 class DashboardView(views.ListView):
-    model = Room
+    model = Poker
     template_name = 'dashboard.html'
     # context_object_name = 'pet_photos'
 
 
-class CreateRoomView(views.CreateView, auth_mixins.LoginRequiredMixin):
-    template_name = 'rooms/create-room.html'
-    form_class = CreateRoomForm
-    success_url = reverse_lazy('all rooms page')
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs['user'] = self.request.user
-        # kwargs['user_id'] = self.request.user.id
-        return kwargs
-
-
-class EditRoomView(views.UpdateView, auth_mixins.LoginRequiredMixin):
-    model = Room
-    template_name = 'rooms/edit-room.html'
-    form_class = EditRoomForm
-    success_url = reverse_lazy('all rooms page')
-
-
-# def get_context_data(self, **kwargs):
-#     context = super().get_context_data(**kwargs)
-#
-#     context['is_owner'] = self.object.user == self.request.user
-#
-#     return context
-
-
-class DeleteRoomView(views.DeleteView):
-    # def get_queryset(self):
-    #     table = super().get_queryset().filter(table=self.request.id)
-    #     return table
-
-    model = Room
-    template_name = 'rooms/delete-room.html'
-    form_class = DeleteRoomForm
-    success_url = reverse_lazy('all rooms page')
-
-
 def get_all_rooms(request):
-    rooms = Room.objects.all()
+    ERROR_MESSAGE = 'There is no GAMES. You have to create a game'
 
-    if not rooms:
-        return redirect('create room page')
+    poker_games = Poker.objects.all()
+    dice_games = Dice.objects.all()
+    roulette_games = Roulette.objects.all()
+
+    if not poker_games and not dice_games and not roulette_games:
+        # TODO: 'Write error message'
+        # TODO: 'You can make a signal here: for the error message'
+        return redirect('dashboard')
 
     context = {
-        'rooms': rooms,
+        'poker_games': poker_games,
+        'dice_games': dice_games,
+        'roulette_games': roulette_games,
     }
 
     return render(request, 'rooms/all-rooms.html', context)

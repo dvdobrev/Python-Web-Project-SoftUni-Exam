@@ -1,19 +1,3 @@
-{#{% extends 'base.html' %}#}
-{##}
-{#{% block page_content %}#}
-{#<h1 class="text-center">Create Your Profile</h1>#}
-{#<div class="row">#}
-{#    <div class="col-lg-3"></div>#}
-{#    <div class="col-lg-6">#}
-{#        <form method="post" action="{% url 'register' %}">#}
-{#            {% csrf_token %}#}
-{#            {{ form }}#}
-{#            <button class="btn btn-primary mt-2" type="submit">Create</button>#}
-{#        </form>#}
-{#    </div>#}
-{#    <div class="col-lg-3"></div>#}
-{#</div>#}
-{#{% endblock %}#}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -109,38 +93,63 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 ">
                             <div class="text-bg">
 
-                                {% for room in rooms %}
-                                    <h1>Room Name: {{ room.name }}</h1>
-                                    <h1>Max Players: {{ room.max_players }}</h1>
-{#                                    <h1>Min Bet: {{ room.min_bet }}$</h1>#}
-                                    {#                                    <h2>{{ room.name }}</h2>#}
+                                {% for roulette in roulette_games %}
+                                    <h1>Game Name: {{ roulette.name }}</h1>
+{#                                    <a>Game Name: {{ roulette.name }}</a>#}
+{#                                    <h1>Max Players: {{ room.max_players }}</h1>#}
+
                                     <div class="tables-container">
-
-
-                                        {#                                        <img src="{{ exp.image }}" alt="{{ exp.description }}">#}
-                                        {##}
-                                        {#                                        {% if exp.description %}#}
-                                        {#                                            <p>{{ exp.description }}</p>#}
-                                        {#                                        {% endif %}#}
-
                                         <div class="room-detail">
                                             <div class="right">
 
-                                                <a href="{% url 'all games page' %}">Show made games in the room</a>
-                                                <a href="{% url 'create game page' %}">Create Game</a>
-
-                                                <a href="{% url 'edit room page' room.pk %}">Edit Room</a>
-                                                <a href="{% url 'delete room page' room.pk %}">Delete Room</a>
-
-                                                {#                                                <a class="button edit"#}
-                                                {#                                                   href="{% url 'edit room page' room.pk %}">Edit</a>#}
+                                                <a href="{% url 'edit roulette game page' roulette.pk %}">Edit Roulette Game</a>
+                                                <a href="{% url 'delete roulette game page' roulette.pk %}">Delete Roulette Game</a>
 
                                             </div>
                                         </div>
                                     </div>
 
+                                {% endfor %}
+
+
+                                {% for poker in poker_games %}
+                                    <h1>Game Name: {{ poker.name }}</h1>
+{#                                    <h1>Max Players: {{ poker.max_players }}</h1>#}
+
+                                    <div class="tables-container">
+                                        <div class="room-detail">
+                                            <div class="right">
+
+                                                <a href="{% url 'edit poker game page' poker.pk %}">Edit Poker Game</a>
+                                                <a href="{% url 'delete poker game page' poker.pk %}">Delete Poker Game</a>
+
+                                            </div>
+                                        </div>
+                                    </div>
 
                                 {% endfor %}
+
+
+
+                                {% for dice in dice_games %}
+                                    <h1>Game Name: {{ dice.name }}</h1>
+{#                                    <h1>Max Players: {{ dice.max_players }}</h1>#}
+
+                                    <div class="tables-container">
+                                        <div class="room-detail">
+                                            <div class="right">
+
+                                                <a href="{% url 'edit dice game page' dice.pk %}">Edit Dice Game</a>
+                                                <a href="{% url 'delete dice game page' dice.pk %}">Delete Dice Game</a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
+
+
+
 
 
                             </div>

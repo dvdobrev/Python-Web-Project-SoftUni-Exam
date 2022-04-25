@@ -12,11 +12,14 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Poker',
+            name='Roulette',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=10)),
                 ('max_players', models.IntegerField()),
+                ('min_bet', models.IntegerField()),
+                ('max_bet', models.IntegerField()),
+                ('game_types', models.CharField(blank=True, choices=[('European', 'European'), ('American', 'American')], max_length=8, null=True)),
             ],
         ),
     ]

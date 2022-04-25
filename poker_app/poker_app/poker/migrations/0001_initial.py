@@ -17,6 +17,8 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=10)),
                 ('max_players', models.IntegerField()),
+                ('min_bet', models.IntegerField()),
+                ('game_types', models.CharField(blank=True, choices=[('Texas Holdem', 'Texas Holdem'), ('Omaha', 'Omaha')], max_length=12, null=True)),
             ],
         ),
     ]

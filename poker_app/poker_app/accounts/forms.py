@@ -4,7 +4,7 @@ from django.contrib.auth import forms as auth_forms, get_user_model
 from django.contrib.auth.models import User
 
 from poker_app.accounts.models import Profile
-from poker_app.web.forms import DisabledFieldsFormMixin
+from poker_app.dice.forms import DisabledFieldsFormMixin
 from poker_app.web.helpers import BootstrapFormMixin
 
 UserModel = get_user_model()
