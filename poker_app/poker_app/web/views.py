@@ -18,7 +18,7 @@ class DashboardView(views.ListView):
     # context_object_name = 'pet_photos'
 
 
-def get_all_rooms(request):
+def get_all_games(request):
     ERROR_MESSAGE = 'There is no GAMES. You have to create a game'
 
     poker_games = Poker.objects.all()
@@ -36,4 +36,4 @@ def get_all_rooms(request):
         'roulette_games': roulette_games,
     }
 
-    return render(request, 'rooms/all-rooms.html', context)
+    return render(request, 'games/all-games.html', context)

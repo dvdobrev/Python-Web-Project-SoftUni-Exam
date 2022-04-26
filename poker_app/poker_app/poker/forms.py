@@ -7,7 +7,7 @@ from poker_app.web.helpers import BootstrapFormMixin
 # UserModel = get_user_model()
 
 
-class CreatePokerRoomForm(forms.ModelForm, BootstrapFormMixin):
+class CreatePokerGameForm(forms.ModelForm, BootstrapFormMixin):
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.user = user
@@ -42,7 +42,7 @@ class CreatePokerRoomForm(forms.ModelForm, BootstrapFormMixin):
         }
 
 
-class EditPokerRoomForm(BootstrapFormMixin, forms.ModelForm):
+class EditPokerGameForm(forms.ModelForm, BootstrapFormMixin):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -57,15 +57,13 @@ class DisabledFieldsFormMixin:
     pass
 
 
-class DeletePokerRoomForm(forms.ModelForm, BootstrapFormMixin, DisabledFieldsFormMixin):
+class DeletePokerGameForm(forms.ModelForm, BootstrapFormMixin, DisabledFieldsFormMixin):
     # def __init__(self, *args, **kwargs):
     #     super().__init__(*args, **kwargs)
     #     self._init_bootstrap_form_controls()
     #     self._init_disabled_fields()
 
     def save(self, commit=True):
-        poker_games = Poker.objects.all()
-        poker_games.delete()
         self.instance.delete()
         return self.instance
 

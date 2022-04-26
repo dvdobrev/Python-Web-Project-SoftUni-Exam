@@ -1,7 +1,6 @@
 from django import forms
 
 from django.contrib.auth import forms as auth_forms, get_user_model
-from django.contrib.auth.models import User
 
 from poker_app.accounts.models import Profile
 from poker_app.dice.forms import DisabledFieldsFormMixin

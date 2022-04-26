@@ -1,0 +1,8 @@
+
+
+<form method="post" action="{% url 'edit roulette game page' roulette.pk %}">
+    {% csrf_token %}
+    {{ form }}
+
+    <button class="btn btn-primary mt-2" type="submit">Edit</button>
+</form>

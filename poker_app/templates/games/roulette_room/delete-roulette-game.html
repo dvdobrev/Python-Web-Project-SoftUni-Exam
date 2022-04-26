@@ -1,13 +1,13 @@
-<h1 class="text-center">Are you sure you want to delete the dice game {{ dice.name }}?</h1>
+<h1 class="text-center">Are you sure you want to delete the roulette game {{ roulette.name }}?</h1>
 
 
-<form method="post" action="{% url 'delete dice game page' dice.pk %}">
+<form method="post" action="{% url 'delete roulette game page' roulette.pk %}">
     {% csrf_token %}
     {{ form }}
 
     <button class="btn btn-primary mt-2" type="submit">Delete</button>
     <a class="button edit"
-       href="{% url 'all rooms page' %}">Go back</a>
+       href="{% url 'all games page' %}">Go back</a>
 
 </form>
 

@@ -7,7 +7,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('poker_app.web.urls')),
     path('accounts/', include('poker_app.accounts.urls')),
-    path('games/', include('poker_app.games.urls')),
     path('roulette/', include('poker_app.roulette.urls')),
     path('dice/', include('poker_app.dice.urls')),
     path('poker/', include('poker_app.poker.urls')),

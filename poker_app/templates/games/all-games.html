@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,6 +44,9 @@
 <!-- end loader -->
 <!-- header -->
 <header>
+
+<h1>Logged User: {{ request.user }}</h1>
+<h1>User ID: {{ request.user.id }}</h1>
     <!-- header inner -->
     <div class="header-top">
         <div class="header">
@@ -92,14 +96,64 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 ">
                             <div class="text-bg">
 
-                                {% for game in games %}
-                                    <h1>Game Type: {{ game.game_type }}</h1>
-                                    <h1>Game Start Bet: {{ game.start_bet }}</h1>
-                                    <h1>Game Min Step : {{ game.min_step_bet }}</h1>
-                                    <h1>Game Max Bet: {{ game.max_bet }}</h1>
-                                    <h1>----------------------------</h1>
+                                {% for roulette in roulette_games %}
+                                    <h1>Game Name: {{ roulette.name }}</h1>
+{#                                    <a>Game Name: {{ roulette.name }}</a>#}
+{#                                    <h1>Max Players: {{ room.max_players }}</h1>#}
+
+                                    <div class="tables-container">
+                                        <div class="room-detail">
+                                            <div class="right">
+
+                                                <a href="{% url 'edit roulette game page' roulette.pk %}">Edit Roulette Game</a>
+                                                <a href="{% url 'delete roulette game page' roulette.pk %}">Delete Roulette Game</a>
+
+                                            </div>
+                                        </div>
+                                    </div>
 
                                 {% endfor %}
+
+
+                                {% for poker in poker_games %}
+                                    <h1>Game Name: {{ poker.name }}</h1>
+{#                                    <h1>Max Players: {{ poker.max_players }}</h1>#}
+
+                                    <div class="tables-container">
+                                        <div class="room-detail">
+                                            <div class="right">
+
+                                                <a href="{% url 'edit poker game page' poker.pk %}">Edit Poker Game</a>
+                                                <a href="{% url 'delete poker game page' poker.pk %}">Delete Poker Game</a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
+
+
+
+                                {% for dice in dice_games %}
+                                    <h1>Game Name: {{ dice.name }}</h1>
+{#                                    <h1>Max Players: {{ dice.max_players }}</h1>#}
+
+                                    <div class="tables-container">
+                                        <div class="room-detail">
+                                            <div class="right">
+
+                                                <a href="{% url 'edit dice game page' dice.pk %}">Edit Dice Game</a>
+                                                <a href="{% url 'delete dice game page' dice.pk %}">Delete Dice Game</a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
+
+
+
+
 
                             </div>
                         </div>
@@ -112,6 +166,24 @@
                 </div>
             </div>
         </section>
+        {#        <section class="slider_section">#}
+        {#            <h1 class="text-center">Create Your Profile</h1>#}
+        {#            <div class="row">#}
+        {#                <div class="col-lg-3"></div>#}
+        {#                <div class="col-lg-6">#}
+        {#                    <form method="post" action="{% url 'all tables page' %}">#}
+        {##}
+        {#                        {% for table in tables %}#}
+        {#                            <h1>Table Name: {{ table.name }}</h1>#}
+        {#                        {% endfor %}#}
+        {#                        {% csrf_token %}#}
+        {#                        {{ form }}#}
+        {#                        <button class="btn btn-primary mt-2" type="submit">Create</button>#}
+        {#                    </form>#}
+        {#                </div>#}
+        {#                <div class="col-lg-3"></div>#}
+        {#            </div>#}
+        {#        </section>#}
 
     </div>
 </header>

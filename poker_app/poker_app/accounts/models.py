@@ -1,13 +1,8 @@
-from cProfile import Profile
-
-from django.contrib.auth import models as auth_models, get_user_model
-
-from django.core.validators import MinLengthValidator, MaxValueValidator
+from django.contrib.auth import models as auth_models
 
 from django.db import models
 
 from poker_app.web.managers import PokerUserManager
-from poker_app.web.validators import validate_only_letters
 
 '''
 1. Create model extending ...
@@ -20,10 +15,7 @@ from poker_app.web.validators import validate_only_letters
 # UserModel = get_user_model()   #----> because of this a got the error for the AUTH_USER_MODEL!!! Be aware
 
 
-# TODO: 'ADD auth_models.PermissionsMixin to the PokerUser'
-
-
-class PokerUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):  # auth_models.PermissionsMixin
+class PokerUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     USERNAME_MAX_LENGTH = 25
 
     username = models.CharField(
@@ -90,12 +82,6 @@ class Profile(models.Model):
         on_delete=models.CASCADE,
         primary_key=True,
     )
-
-    # user = models.OneToOneField(
-    #     UserModel,
-    #     on_delete=models.CASCADE,
-    #     primary_key=True,
-    # )
 
     # def __str__(self):
     #     return f'{self.first_name} {self.last_name}'

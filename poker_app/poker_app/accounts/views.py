@@ -14,7 +14,7 @@ from poker_app.accounts.models import Profile, PokerUser
 class UserRegisterView(views.CreateView):
     form_class = CreateProfileForm
     template_name = 'accounts/register.html'
-    success_url = reverse_lazy('home page')
+    success_url = reverse_lazy('dashboard')
 
     def form_valid(self, *args, **kwargs):
         result = super().form_valid(*args, **kwargs)

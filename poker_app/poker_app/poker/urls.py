@@ -1,11 +1,11 @@
 from django.urls import path
 
-from poker_app.poker.views import CreatePokerRoomView, EditPokerRoomView, DeletePokerRoomView
+from poker_app.poker.views import CreatePokerGameView, EditPokerGameView, DeletePokerGameView
 
 urlpatterns = (
 
-    path('create/', CreatePokerRoomView.as_view(), name='create poker game page'),
-    path('edit/<int:pk>/', EditPokerRoomView.as_view(), name='edit poker game page'),
-    path('delete/<int:pk>/', DeletePokerRoomView.as_view(), name='delete poker game page'),
+    path('create/', CreatePokerGameView.as_view(), name='create poker game page'),
+    path('edit/<int:pk>/', EditPokerGameView.as_view(), name='edit poker game page'),
+    path('delete/<int:pk>/', DeletePokerGameView.as_view(), name='delete poker game page'),
 
 )

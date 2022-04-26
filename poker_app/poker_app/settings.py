@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'poker_app.poker',
     'poker_app.roulette',
     'poker_app.dice',
-    'poker_app.games',
     # 'poker_app.accounts.PokerUser',
 
 ]

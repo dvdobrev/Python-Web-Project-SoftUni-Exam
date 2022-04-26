@@ -6,10 +6,10 @@ from poker_app.dice.forms import CreateDiceRoomForm, EditDiceRoomForm, DeleteDic
 from poker_app.dice.models import Dice
 
 
-class CreateDiceRoomView(views.CreateView, auth_mixins.LoginRequiredMixin):
-    template_name = 'rooms/dice_room/create-dice_room.html'
+class CreateDiceRoomView(auth_mixins.LoginRequiredMixin, views.CreateView):
+    template_name = 'games/dice_room/create-dice_game.html'
     form_class = CreateDiceRoomForm
-    success_url = reverse_lazy('all rooms page')
+    success_url = reverse_lazy('all games page')
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -18,11 +18,11 @@ class CreateDiceRoomView(views.CreateView, auth_mixins.LoginRequiredMixin):
         return kwargs
 
 
-class EditDiceRoomView(views.UpdateView, auth_mixins.LoginRequiredMixin):
+class EditDiceRoomView(auth_mixins.LoginRequiredMixin, views.UpdateView):
     model = Dice
-    template_name = 'rooms/dice_room/edit-dice-room.html'
+    template_name = 'games/dice_room/edit-dice-game.html'
     form_class = EditDiceRoomForm
-    success_url = reverse_lazy('all rooms page')
+    success_url = reverse_lazy('all games page')
 
 
 # def get_context_data(self, **kwargs):
@@ -39,9 +39,9 @@ class DeleteDiceRoomView(views.DeleteView):
     #     return table
 
     model = Dice
-    template_name = 'rooms/dice_room/delete-dice-room.html'
+    template_name = 'games/dice_room/delete-dice-game.html'
     form_class = DeleteDiceRoomForm
-    success_url = reverse_lazy('all rooms page')
+    success_url = reverse_lazy('all games page')
 
 
 # def get_all_rooms(request):
@@ -54,4 +54,4 @@ class DeleteDiceRoomView(views.DeleteView):
 #         'dice': dice,
 #     }
 #
-#     return render(request, 'rooms/all-rooms.html', context)
+#     return render(request, 'games/all-games.html', context)

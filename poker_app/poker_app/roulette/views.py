@@ -6,10 +6,10 @@ from poker_app.roulette.forms import CreateRouletteRoomForm, EditRouletteRoomFor
 from poker_app.roulette.models import Roulette
 
 
-class CreateRouletteRoomView(views.CreateView, auth_mixins.LoginRequiredMixin):
-    template_name = 'rooms/roulette_room/create-roulette-room.html'
+class CreateRouletteGameView(auth_mixins.LoginRequiredMixin, views.CreateView):
+    template_name = 'games/roulette_room/create-roulette-game.html'
     form_class = CreateRouletteRoomForm
-    success_url = reverse_lazy('all rooms page')
+    success_url = reverse_lazy('all games page')
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -18,11 +18,11 @@ class CreateRouletteRoomView(views.CreateView, auth_mixins.LoginRequiredMixin):
         return kwargs
 
 
-class EditRouletteRoomView(views.UpdateView, auth_mixins.LoginRequiredMixin):
+class EditRouletteGameView(auth_mixins.LoginRequiredMixin, views.UpdateView):
     model = Roulette
-    template_name = 'rooms/roulette_room/edit-roulette-room.html'
+    template_name = 'games/roulette_room/edit-roulette-game.html'
     form_class = EditRouletteRoomForm
-    success_url = reverse_lazy('all rooms page')
+    success_url = reverse_lazy('all games page')
 
 
 # def get_context_data(self, **kwargs):
@@ -33,16 +33,15 @@ class EditRouletteRoomView(views.UpdateView, auth_mixins.LoginRequiredMixin):
 #     return context
 
 
-class DeleteRouletteRoomView(views.DeleteView):
+class DeleteRouletteGameView(views.DeleteView):
     # def get_queryset(self):
     #     table = super().get_queryset().filter(table=self.request.id)
     #     return table
 
     model = Roulette
-    template_name = 'rooms/roulette_room/delete-roulette-room.html'
+    template_name = 'games/roulette_room/delete-roulette-game.html'
     form_class = DeleteRouletteRoomForm
-    success_url = reverse_lazy('all rooms page')
-
+    success_url = reverse_lazy('all games page')
 
 # def get_all_rooms(request):
 #     roulette_games = Roulette.objects.all()
@@ -54,4 +53,4 @@ class DeleteRouletteRoomView(views.DeleteView):
 #         'roulette_games': roulette_games,
 #     }
 #
-#     return render(request, 'rooms/all-rooms.html', context)
+#     return render(request, 'games/all-games.html', context)
