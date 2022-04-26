@@ -1,9 +1,12 @@
 from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
 from django.views import generic as views
 
 from poker_app.dice.models import Dice
 from poker_app.poker.models import Poker
 from poker_app.roulette.models import Roulette
+from poker_app.web.forms import CreateRulesForm
+from poker_app.web.models import Rules
 
 
 class HomeView(views.TemplateView):
@@ -16,6 +19,14 @@ class DashboardView(views.ListView):
     model = Poker
     template_name = 'dashboard.html'
     # context_object_name = 'pet_photos'
+
+
+class CreateRuleView(views.ListView):
+    model = Rules
+    form_class = CreateRulesForm
+
+    template_name = 'rules.html'
+    success_url = reverse_lazy('all games page')
 
 
 def get_all_games(request):

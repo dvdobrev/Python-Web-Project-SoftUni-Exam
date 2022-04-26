@@ -44,7 +44,7 @@ class ProfileEditView(views.UpdateView):
     model = Profile
     template_name = 'accounts/profile-edit.html'
     form_class = EditProfileForm
-    context_object_name = 'profile'
+    # context_object_name = 'profile'
     success_url = reverse_lazy('dashboard')
 
 
@@ -52,7 +52,7 @@ class ProfileDetailsView(views.DetailView):
     model = Profile
     template_name = 'accounts/profile-details.html'
     context_object_name = 'profile'
-    success_url = reverse_lazy('profile details page')
+    success_url = reverse_lazy('home page')
 
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)

@@ -1,10 +1,11 @@
 from django.urls import path
 
-from poker_app.web.views import HomeView, DashboardView, get_all_games
+from poker_app.web.views import HomeView, DashboardView, get_all_games, CreateRuleView
 
 urlpatterns = (
     path('', HomeView.as_view(), name='home page'),
     path('dashboard/', DashboardView.as_view(), name='dashboard'),
+    path('rules/', CreateRuleView.as_view(), name='rules page'),
 
     # path('dice/create/', CreateDiceRoomView.as_view(), name='create dice room page'),
     # path('dice/edit/<int:pk>/', EditDiceRoomView.as_view(), name='edit dice room page'),
