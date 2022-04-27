@@ -12,7 +12,9 @@ class Roulette(models.Model):
     # GAME_TYPES = [(x, x) for x in (EUROPEAN, AMERICAN)]
 
     name = models.CharField(
-        max_length=10
+        max_length=10,
+        unique=True,
+
     )
 
     # max_players = models.IntegerField()

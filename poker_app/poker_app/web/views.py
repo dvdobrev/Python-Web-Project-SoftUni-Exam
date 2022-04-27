@@ -8,14 +8,10 @@ from poker_app.roulette.models import Roulette
 
 class HomeView(views.TemplateView):
     template_name = 'home_page_no_profile.html'
-    # template_name = 'index.html'
-    # template_name = 'base.html'
-
 
 class DashboardView(views.ListView):
     model = Poker
     template_name = 'dashboard.html'
-    # context_object_name = 'pet_photos'
 
 
 def get_all_games(request):

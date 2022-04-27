@@ -45,14 +45,12 @@ class ProfileEditView(views.UpdateView):
     model = Profile
     template_name = 'accounts/profile-edit.html'
     form_class = EditProfileForm
-    # context_object_name = 'profile'
     success_url = reverse_lazy('dashboard')
 
 
 class ProfileDetailsView(views.DetailView):
     model = Profile
     template_name = 'accounts/profile-details.html'
-    context_object_name = 'profile'
     success_url = reverse_lazy('home page')
 
     # def get_context_data(self, **kwargs):
@@ -70,22 +68,6 @@ class ProfileDetailsView(views.DetailView):
     #     return context
 
 
-# class ProfileDeleteView(views.DeleteView):
-#     model = PokerUser
-#     template_name = 'accounts/profile-delete.html'
-#     form_class = DeleteProfileForm
-#     success_url = reverse_lazy('home page')
-
-    #
-    # def get_object(self, queryset=None):
-    #     profile_object = super(ProfileDeleteView, self).get_object()
-    #     return profile_object
-
-
-# def delete_profile(request):
-#     return profile_action(request, DeleteProfileForm, 'index', get_profile(), 'main/profile_delete.html')
-
-#
 @login_required
 def delete_profile(request, pk):
     if request.method == 'POST':

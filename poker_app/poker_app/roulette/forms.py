@@ -3,10 +3,6 @@ from django import forms
 from poker_app.roulette.models import Roulette
 from poker_app.web.helpers import BootstrapFormMixin
 
-
-# UserModel = get_user_model()
-
-
 class CreateRouletteRoomForm(forms.ModelForm, BootstrapFormMixin):
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -64,12 +60,9 @@ class DeleteRouletteRoomForm(forms.ModelForm, BootstrapFormMixin, DisabledFields
     #     self._init_disabled_fields()
 
     def save(self, commit=True):
-        # games = GameType.objects.all()
-        # games.delete()
         self.instance.delete()
         return self.instance
 
     class Meta:
         model = Roulette
         fields = ()
-        # fields = "__all__"

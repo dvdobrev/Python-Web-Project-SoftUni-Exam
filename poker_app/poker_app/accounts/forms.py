@@ -16,8 +16,6 @@ class CreateProfileForm(BootstrapFormMixin, auth_forms.UserCreationForm):
     # last_name = forms.CharField(
     #     max_length=Profile.LAST_NAME_MAX_LENGTH,
     # )
-    # picture = forms.URLField()
-    # date_of_birth = forms.DateField()
     # slogan = forms.CharField(
     #     widget=forms.Textarea,
     # )
@@ -33,8 +31,6 @@ class CreateProfileForm(BootstrapFormMixin, auth_forms.UserCreationForm):
         profile = Profile(
             # first_name=self.cleaned_data['first_name'],
             # last_name=self.cleaned_data['last_name'],
-            # picture=self.cleaned_data['picture'],
-            # date_of_birth=self.cleaned_data['date_of_birth'],
             # slogan=self.cleaned_data['slogan'],
             email=self.cleaned_data['email'],
             user=user,
@@ -91,4 +87,3 @@ class DeleteProfileForm(forms.ModelForm, BootstrapFormMixin, DisabledFieldsFormM
     class Meta:
         model = Profile
         fields = ()
-        # fields = "__all__"

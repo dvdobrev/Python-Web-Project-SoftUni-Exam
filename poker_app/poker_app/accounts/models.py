@@ -1,8 +1,10 @@
 from django.contrib.auth import models as auth_models
+from django.core.validators import MinLengthValidator, MaxLengthValidator
 
 from django.db import models
 
 from poker_app.web.managers import PokerUserManager
+from poker_app.web.validators import validate_only_letters
 
 '''
 1. Create model extending ...
@@ -43,11 +45,12 @@ class Profile(models.Model):
     LAST_NAME_MIN_LENGTH = 2
     LAST_NAME_MAX_LENGTH = 20
 
-    #
+
     # first_name = models.CharField(
     #     max_length=FIRST_NAME_MAX_LENGTH,
     #     validators=(
     #         MinLengthValidator(FIRST_NAME_MIN_LENGTH),
+    #         MaxLengthValidator(LAST_NAME_MAX_LENGTH),
     #         validate_only_letters,
     #     )
     # )
@@ -56,16 +59,12 @@ class Profile(models.Model):
     #     max_length=LAST_NAME_MAX_LENGTH,
     #     validators=(
     #         MinLengthValidator(LAST_NAME_MIN_LENGTH),
+    #         MaxLengthValidator(LAST_NAME_MAX_LENGTH),
     #         validate_only_letters,
     #     )
     # )
     #
-    # picture = models.URLField()
     #
-    # date_of_birth = models.DateField(
-    #     null=True,
-    #     blank=True,
-    # )
     #
     # slogan = models.TextField(
     #     null=True,
@@ -73,6 +72,7 @@ class Profile(models.Model):
     # )
 
     email = models.EmailField(
+        unique=True,
         null=True,
         blank=True,
     )

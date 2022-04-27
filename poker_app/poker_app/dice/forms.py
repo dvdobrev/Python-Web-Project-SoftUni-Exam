@@ -61,12 +61,9 @@ class DeleteDiceRoomForm(forms.ModelForm, BootstrapFormMixin, DisabledFieldsForm
     #     self._init_disabled_fields()
 
     def save(self, commit=True):
-        # dice = GameType.objects.all()
-        # games.delete()
         self.instance.delete()
         return self.instance
 
     class Meta:
         model = Dice
         fields = ()
-        # fields = "__all__"

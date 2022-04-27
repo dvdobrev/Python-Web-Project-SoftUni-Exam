@@ -14,7 +14,6 @@ class CreateDiceRoomView(auth_mixins.LoginRequiredMixin, views.CreateView):
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs['user'] = self.request.user
-        # kwargs['user_id'] = self.request.user.id
         return kwargs
 
 
@@ -25,33 +24,8 @@ class EditDiceRoomView(auth_mixins.LoginRequiredMixin, views.UpdateView):
     success_url = reverse_lazy('all games page')
 
 
-# def get_context_data(self, **kwargs):
-#     context = super().get_context_data(**kwargs)
-#
-#     context['is_owner'] = self.object.user == self.request.user
-#
-#     return context
-
-
 class DeleteDiceRoomView(views.DeleteView):
-    # def get_queryset(self):
-    #     table = super().get_queryset().filter(table=self.request.id)
-    #     return table
-
     model = Dice
     template_name = 'games/dice_room/delete-dice-game.html'
     form_class = DeleteDiceRoomForm
     success_url = reverse_lazy('all games page')
-
-
-# def get_all_rooms(request):
-#     dice = Dice.objects.all()
-#
-#     if not dice:
-#         return redirect('create dice room page')
-#
-#     context = {
-#         'dice': dice,
-#     }
-#
-#     return render(request, 'games/all-games.html', context)
