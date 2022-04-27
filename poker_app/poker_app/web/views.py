@@ -9,6 +9,7 @@ from poker_app.roulette.models import Roulette
 class HomeView(views.TemplateView):
     template_name = 'home_page_no_profile.html'
 
+
 class DashboardView(views.ListView):
     model = Poker
     template_name = 'dashboard.html'

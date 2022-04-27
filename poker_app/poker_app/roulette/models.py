@@ -1,11 +1,19 @@
 from django.contrib.auth import get_user_model
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
+from poker_app.web.validators import RouletteMinPlayersValidator, RouletteMaxPlayersValidator, MaxBetValidator
 
 UserModel = get_user_model()
 
 
 class Roulette(models.Model):
+    GAME_MAX_PLAYERS = 20
+    GAME_MIN_PLAYERS = 1
+
+    GAME_MAX_BET = 50
+    GAME_MIN_BET = 5
+
     # EUROPEAN = 'European'
     # AMERICAN = 'American'
     #
@@ -17,10 +25,24 @@ class Roulette(models.Model):
 
     )
 
-    # max_players = models.IntegerField()
-    #
-    # min_bet = models.IntegerField()
-    # max_bet = models.IntegerField()
+    max_players = models.IntegerField(
+        validators=(
+            MaxValueValidator(GAME_MAX_PLAYERS),
+            RouletteMinPlayersValidator(GAME_MAX_PLAYERS)
+        )
+    )
+
+    min_bet = models.IntegerField(
+        validators=(
+            RouletteMaxPlayersValidator(GAME_MIN_BET),
+        )
+    )
+
+    max_bet = models.IntegerField(
+        validators=(
+            MaxBetValidator(GAME_MAX_BET),
+        )
+    )
 
     #
     # game_types = models.CharField(
