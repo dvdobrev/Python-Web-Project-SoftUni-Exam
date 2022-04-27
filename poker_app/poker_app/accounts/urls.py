@@ -4,7 +4,7 @@ from django.urls import path, include
 
 
 from poker_app.accounts.views import UserRegisterView, UserLoginView, ProfileEditView, ProfileDetailsView, \
-    ProfileDeleteView, UserLogoutView
+    UserLogoutView, delete_profile
 
 urlpatterns = (
     # path('accounts/', include('django.contrib.auth.urls')),
@@ -20,7 +20,7 @@ urlpatterns = (
     path('details/<int:pk>/', ProfileDetailsView.as_view(), name='profile details page'),
     path('edit/<int:pk>/', ProfileEditView.as_view(), name='edit profile page'),
 
-    path('delete/<int:pk>/', ProfileDeleteView.as_view(), name='profile delete page'),
-    # path('delete/<int:pk>/', delete_profile, name='profile delete page'),
+    # path('delete/<int:pk>/', ProfileDeleteView.as_view(), name='profile delete page'),
+    path('delete/<int:pk>/', delete_profile, name='profile delete page'),
 
 )

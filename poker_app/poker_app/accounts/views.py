@@ -8,6 +8,7 @@ from django.urls import reverse_lazy
 from poker_app.accounts.forms import EditProfileForm, CreateProfileForm, DeleteProfileForm
 from poker_app.accounts.models import Profile, PokerUser
 
+
 # TODO: 'add RedirectToHomePage to the UserRegisterView'
 
 
@@ -69,34 +70,39 @@ class ProfileDetailsView(views.DetailView):
     #     return context
 
 
-class ProfileDeleteView(views.DeleteView):
-    model = PokerUser
-    template_name = 'accounts/profile-delete.html'
-    form_class = DeleteProfileForm
-    success_url = reverse_lazy('home page')
+# class ProfileDeleteView(views.DeleteView):
+#     model = PokerUser
+#     template_name = 'accounts/profile-delete.html'
+#     form_class = DeleteProfileForm
+#     success_url = reverse_lazy('home page')
 
     #
     # def get_object(self, queryset=None):
     #     profile_object = super(ProfileDeleteView, self).get_object()
     #     return profile_object
 
+
 # def delete_profile(request):
 #     return profile_action(request, DeleteProfileForm, 'index', get_profile(), 'main/profile_delete.html')
 
 #
-# @login_required
-# def delete_profile(request, pk):
-#     if request.method == 'POST':
-#         delete_form = DeleteProfileForm(request.POST, instance=request.user)
-#         user = request.user
-#         user.delete()
-#         # messages.info(request, 'Your account has been deleted.')
-#         return redirect('home page')
-#     else:
-#         delete_form = DeleteProfileForm(instance=request.user)
+@login_required
+def delete_profile(request, pk):
+    if request.method == 'POST':
+        form = DeleteProfileForm(request.POST, instance=request.user)
+        user = request.user
+        user.delete()
+        # messages.info(request, 'Your account has been deleted.')
+        return redirect('home page')
+    else:
+        form = DeleteProfileForm(instance=request.user)
+
+    context = {
+        'form': form
+    }
+
+    return render(request, 'accounts/profile-delete.html', context)
+
 #
-#     context = {
-#         'delete_form': delete_form
-#     }
-#
-#     return render(request, 'accounts/profile-delete.html', context)
+# class ChangeUserPasswordView(auth_views.PasswordChangeView):
+#     template_name = 'accounts/change_password.html'

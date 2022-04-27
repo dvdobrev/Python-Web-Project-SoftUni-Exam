@@ -1,5 +1,7 @@
 from django import forms
 
+from poker_app import poker
+from poker_app.accounts import models
 from poker_app.poker.models import Poker
 from poker_app.web.helpers import BootstrapFormMixin
 
@@ -13,6 +15,7 @@ class CreatePokerGameForm(forms.ModelForm, BootstrapFormMixin):
         self.user = user
         self._init_bootstrap_form_controls()
 
+    #
     def save(self, commit=True):
         # commit false does not persist to database
         # just returns the object to be created
@@ -24,13 +27,19 @@ class CreatePokerGameForm(forms.ModelForm, BootstrapFormMixin):
 
         return poker
 
+    # def form_valid(self, form):
+    #     form.instance.owneeer_id = self.user.id
+    #     return super().form_valid(form)
+
     class Meta:
         model = Poker
-        fields = '__all__'
+        exclude = ('user',)
+        # exclude = ('user_id',)
+        # exclude = ('owner_idd',)
         widgets = {
             'name': forms.TextInput(
                 attrs={
-                    'placeholder': 'Enter room name',
+                    'placeholder': 'Enter Game Name',
                 }
             ),
 
@@ -44,14 +53,13 @@ class CreatePokerGameForm(forms.ModelForm, BootstrapFormMixin):
 
 class EditPokerGameForm(forms.ModelForm, BootstrapFormMixin):
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self._init_bootstrap_form_controls()
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self._init_bootstrap_form_controls()
 
     class Meta:
         model = Poker
-        fields = '__all__'
-
+        exclude = ('user',)
 
 class DisabledFieldsFormMixin:
     pass

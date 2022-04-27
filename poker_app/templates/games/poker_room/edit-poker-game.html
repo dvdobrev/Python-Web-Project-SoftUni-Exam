@@ -1,6 +1,12 @@
-<form method="post" action="{% url 'edit poker game page' poker.id %}">
-    {% csrf_token %}
-    {{ form }}
+{% extends 'base.html' %}
+{% block page_content %}
+    <form method="post" action="{% url 'edit poker game page'  poker.pk %}">
+        {% csrf_token %}
+        {{ form }}
 
-    <button class="btn btn-primary mt-2" type="submit">Edit</button>
-</form>
+        <button class="btn btn-primary mt-2" type="submit">Edit</button>
+        <a href="{% url 'all games page' %}">Go back</a>
+
+    </form>
+
+{% endblock %}

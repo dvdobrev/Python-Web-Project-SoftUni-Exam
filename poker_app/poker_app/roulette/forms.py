@@ -26,7 +26,7 @@ class CreateRouletteRoomForm(forms.ModelForm, BootstrapFormMixin):
 
     class Meta:
         model = Roulette
-        fields = '__all__'
+        exclude = ('user',)
         widgets = {
             'name': forms.TextInput(
                 attrs={
@@ -50,7 +50,7 @@ class EditRouletteRoomForm(BootstrapFormMixin, forms.ModelForm):
 
     class Meta:
         model = Roulette
-        fields = '__all__'
+        exclude = ('user',)
 
 
 class DisabledFieldsFormMixin:

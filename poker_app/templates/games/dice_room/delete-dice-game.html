@@ -1,3 +1,6 @@
+{% extends 'base.html'%}
+{% block page_content %}
+
 <h1 class="text-center">Are you sure you want to delete the dice game {{ dice.name }}?</h1>
 
 
@@ -10,10 +13,5 @@
        href="{% url 'all games page' %}">Go back</a>
 
 </form>
+{% endblock %}
 
-
-{#<form method="post">{% csrf_token %}#}
-{#    <p>Are you sure you want to delete "{{ object }}"?</p>#}
-{#    {{ form }}#}
-{#    <input type="submit" value="Confirm">#}
-{#</form>#}

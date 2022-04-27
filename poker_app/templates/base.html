@@ -42,77 +42,90 @@
 </div>
 <!-- end loader -->
 <!-- header -->
+
+
 <header>
-    <h1>{{ request.user }}</h1>
-    <!-- header inner -->
-    <div class="header-top">
-        <div class="header">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
-                        <div class="full">
-                            <div class="center-desk">
-                                <div class="logo">
-                                    <a href="index.html"><img src="/static/images/logo.png" alt="#"/></a>
+
+    <h1>User: {{ request.user }}</h1>
+
+    {% if request.user.is_authenticated %}
+        <!-- header inner -->
+        <div class="header-top">
+            <div class="header">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+                            <div class="full">
+                            </div>
+                        </div>
+                        <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+                            <div class="menu-area">
+                                <div class="limit-box">
+                                    <nav class="main-menu">
+                                        <ul class="menu-area-main">
+
+                                            <li class="active"><a href="{% url 'dashboard' %}">Home</a></li>
+
+                                            <li><a href="{% url 'profile details page' request.user.id %}">Profile</a>
+                                            </li>
+                                            <li class="active"><a href="{% url 'logout page' %}">Logout</a></li>
+
+
+                                        </ul>
+                                    </nav>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
-                        <div class="menu-area">
-                            <div class="limit-box">
-                                <nav class="main-menu">
-                                    <ul class="menu-area-main">
-                                        {#                                        <li class="active"><a href="index.html">Home</a></li>#}
-                                        {#                                        <li><a href="#casino">Profile</a></li>#}
-                                        {#                                        <li><a href="#booktable">Book Table</a></li>#}
-
-{#                                        <li><a href="{% url 'all games page' %}">Show avaiable tables</a></li>#}
-                                        {#                                        <li><a href="#">Show customers feedback</a></li>#}
+                </div>
+            </div>
 
 
-                                        <li class="mean-last">
-                                            <a href="#"><img src="/static/images/search_icon.png" alt="#"/></a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
+            <section class="slider_section">
+                <div class="banner_main">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 ">
+                                <div class="text-bg">
+
+
+                                    {% block page_content %}
+
+
+                                        <h1>Wanna<br> <strong class="b_bold">Play </strong>
+                                        </h1>
+                                        <span> Gambling can make your addicted!!! </span>
+                                        <a href="{% url 'create poker game page' %}">Create
+                                            Poker Game</a>
+                                        <a href="{% url 'create roulette game page' %}">Create
+                                            Roulette Game</a>
+                                        {% if request.user.is_staff %}
+
+                                            <a href="{% url 'create dice game page' %}">Create
+                                                Dice Game</a>
+                                        {% endif %}
+
+                                        <a href="{% url 'all games page' %}">Show all
+                                            Games</a>
+                                        </div>
+                                        </div>
+                                    {% endblock %}
+
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
+
         </div>
 
-        <section class="slider_section">
-            <div class="banner_main">
+    {% else %}
 
-                <div class="container">
+        <h1>You are not loged in</h1>
 
-                    <div class="row">
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 ">
-                            <div class="text-bg">
-                                <h1>Welcome to <br> <strong class="b_bold">Dobri's casino </strong></h1>
-                                <span> Gambling can make your addicted!!! </span>
-                                <a href="{% url 'login page' %}">Login</a> <a href="{% url 'register' %}">Register</a>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <div class="text-img">
-                                <figure><img src="/static/images/img.png"/></figure>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </div>
+        <li><a href="{% url 'home page' %}"> Go Back </a></li>
+    {% endif %}
 </header>
 <!-- end header inner -->
-
-
-{% block page_content %}
-{% endblock %}
 
 <!--  footer -->
 <footer>

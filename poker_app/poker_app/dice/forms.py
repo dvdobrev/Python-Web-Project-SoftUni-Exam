@@ -4,9 +4,6 @@ from poker_app.dice.models import Dice
 from poker_app.web.helpers import BootstrapFormMixin
 
 
-# UserModel = get_user_model()
-
-
 class CreateDiceRoomForm(forms.ModelForm, BootstrapFormMixin):
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -26,7 +23,7 @@ class CreateDiceRoomForm(forms.ModelForm, BootstrapFormMixin):
 
     class Meta:
         model = Dice
-        fields = '__all__'
+        exclude = ('user',)
         widgets = {
             'name': forms.TextInput(
                 attrs={
@@ -50,7 +47,7 @@ class EditDiceRoomForm(BootstrapFormMixin, forms.ModelForm):
 
     class Meta:
         model = Dice
-        fields = '__all__'
+        exclude = ('user',)
 
 
 class DisabledFieldsFormMixin:

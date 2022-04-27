@@ -1,11 +1,11 @@
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.db.models import CASCADE
 
 UserModel = get_user_model()
 from poker_app.accounts.models import PokerUser
 
 
+# @login_required(UserModel)
 class Poker(models.Model):
     # TEXAS_HOLEM = 'Texas Holdem'
     # OMAHA = 'Omaha'
@@ -15,6 +15,15 @@ class Poker(models.Model):
     name = models.CharField(
         max_length=10
     )
+    #
+    # owner_idd = models.IntegerField(
+    #     default=0,
+    # )
+
+    # owner_idd = models.ForeignKey(
+    #     UserModel,
+    #     on_delete=CASCADE
+    # )
 
     # max_players = models.IntegerField()
     #
@@ -26,10 +35,6 @@ class Poker(models.Model):
     #     on_delete=models.CASCADE,
     #     primary_key=True,
     # )
-    user = models.ForeignKey(
-        UserModel,
-        on_delete=CASCADE
-    )
 
     # game_types = models.CharField(
     #     max_length=max(len(x) for x, _ in GAME_TYPES),
@@ -37,3 +42,8 @@ class Poker(models.Model):
     #     null=True,
     #     blank=True,
     # )
+
+    user = models.ForeignKey(
+        UserModel,
+        on_delete=models.CASCADE
+    )
