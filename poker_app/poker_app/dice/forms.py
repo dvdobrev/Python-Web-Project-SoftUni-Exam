@@ -4,7 +4,7 @@ from poker_app.dice.models import Dice
 from poker_app.web.helpers import BootstrapFormMixin
 
 
-class CreateDiceRoomForm(forms.ModelForm, BootstrapFormMixin):
+class CreateDiceGameForm(forms.ModelForm, BootstrapFormMixin):
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.user = user
@@ -36,10 +36,22 @@ class CreateDiceRoomForm(forms.ModelForm, BootstrapFormMixin):
                     'placeholder': 'Enter max players',
                 }
             ),
+
+            'min_bet': forms.TextInput(
+                attrs={
+                    'placeholder': 'Enter min bet',
+                }
+            ),
+
+            'max_bet': forms.TextInput(
+                attrs={
+                    'placeholder': 'Enter max bet',
+                }
+            ),
         }
 
 
-class EditDiceRoomForm(BootstrapFormMixin, forms.ModelForm):
+class EditDiceGameForm(BootstrapFormMixin, forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -50,15 +62,7 @@ class EditDiceRoomForm(BootstrapFormMixin, forms.ModelForm):
         exclude = ('user',)
 
 
-class DisabledFieldsFormMixin:
-    pass
-
-
-class DeleteDiceRoomForm(forms.ModelForm, BootstrapFormMixin, DisabledFieldsFormMixin):
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self._init_bootstrap_form_controls()
-    #     self._init_disabled_fields()
+class DeleteDiceGameForm(forms.ModelForm):
 
     def save(self, commit=True):
         self.instance.delete()

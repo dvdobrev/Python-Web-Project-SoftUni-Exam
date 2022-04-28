@@ -41,7 +41,7 @@ class RouletteMinPlayersValidator:
 
 
 @deconstructible
-class RouletteMaxPlayersValidator:
+class MinBetValidator:
     def __init__(self, min_value):
         self.min_value = min_value
 

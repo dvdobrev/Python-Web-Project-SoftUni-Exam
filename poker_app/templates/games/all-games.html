@@ -2,58 +2,64 @@
 {% block page_content %}
 
     {% for roulette in roulette_games %}
-        <h1>Game Name: {{ roulette.name }}</h1>
+        <div>
+            <h2 style="color: white">Game Name: {{ roulette.name }}</h2>
+            <h2 style="color: white">Min Bet: {{ roulette.min_bet }}$</h2>
+            <h2 style="color: white">Max Bet: {{ roulette.max_bet }}$</h2>
+            <h2 style="color: white">Max Players: {{ roulette.max_players }}</h2>
 
-        <div class="tables-container">
-            <div class="room-detail">
-                <div class="right">
-                    {% if user_id == request.user.id %}
-                        <a href="{% url 'edit roulette game page' roulette.pk %}">Edit
-                            Roulette Game</a>
-                        <a href="{% url 'delete roulette game page' roulette.pk %}">Delete
-                            Roulette Game</a>
-                    {% endif %}
-                </div>
-            </div>
+
+            {% if roulette.user_id == request.user.id %}
+                <a href="{% url 'edit roulette game page' roulette.pk %}">Edit
+                    Roulette Game</a>
+                <a href="{% url 'delete roulette game page' roulette.pk %}">Delete
+                    Roulette Game</a>
+                <br>
+                <br>
+                <br>
+            {% endif %}
         </div>
-
     {% endfor %}
 
+
     {% for poker in poker_games %}
-        <h1>Game Name: {{ poker.name }}</h1>
-{#        <h1>Owner ID: {{ poker.user_id }}</h1>#}
+        <div>
 
-        <div class="tables-container">
-            <div class="room-detail">
-                <div class="right">
-                    {% if poker.user_id == request.user.id %}
-                        <a href="{% url 'edit poker game page' poker.pk %}">Edit Poker
-                            Game</a>
-                        <a href="{% url 'delete poker game page' poker.pk %}">Delete Poker
-                            Game</a>
-                    {% endif %}
-                </div>
-            </div>
+            <h2 style="color: white">Game Name: {{ poker.name }}</h2>
+            <h2 style="color: white">Min Bet: {{ poker.min_bet }}$</h2>
+            <h2 style="color: white">Max Bet: {{ poker.max_bet }}$</h2>
+            <h2 style="color: white">Max Players: {{ poker.max_players }}</h2>
+
+            {% if poker.user_id == request.user.id %}
+
+                <a href="{% url 'edit poker game page' poker.pk %}">Edit Poker
+                    Game</a>
+                <a href="{% url 'delete poker game page' poker.pk %}">Delete Poker
+                    Game</a>
+                <br>
+                <br>
+                <br>
+            {% endif %}
         </div>
-
     {% endfor %}
 
 
     {% for dice in dice_games %}
-        <h1>Game Name: {{ dice.name }}</h1>
-        {#                                    <h1>Max Players: {{ dice.max_players }}</h1>#}
+        <div>
+            <h2 style="color: white">Game Name: {{ dice.name }}</h2>
+            <h2 style="color: white">Min Bet: {{ dice.min_bet }}$</h2>
+            <h2 style="color: white">Max Bet: {{ dice.max_bet }}$</h2>
+            <h2 style="color: white">Max Players: {{ dice.max_players }}</h2>
 
-        <div class="tables-container">
-            <div class="room-detail">
-                <div class="right">
+            {% if dice.user_id == request.user.id %}
 
-                    <a href="{% url 'edit dice game page' dice.pk %}">Edit Dice Game</a>
-                    <a href="{% url 'delete dice game page' dice.pk %}">Delete Dice Game</a>
-
-                </div>
-            </div>
+                <a href="{% url 'edit dice game page' dice.pk %}">Edit Dice Game</a>
+                <a href="{% url 'delete dice game page' dice.pk %}">Delete Dice Game</a>
+                <br>
+                <br>
+                <br>
+            {% endif %}
         </div>
-
     {% endfor %}
 
 {% endblock %}

@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
-from poker_app.web.validators import RouletteMaxPlayersValidator, MaxBetValidator
+from poker_app.web.validators import MinBetValidator, MaxBetValidator
 
 UserModel = get_user_model()
 
@@ -28,13 +28,13 @@ class Dice(models.Model):
     max_players = models.IntegerField(
         validators=(
             MaxValueValidator(GAME_MAX_PLAYERS),
-            MinValueValidator(GAME_MAX_PLAYERS)
+            MinValueValidator(GAME_MIN_PLAYERS)
         )
     )
 
     min_bet = models.IntegerField(
         validators=(
-            RouletteMaxPlayersValidator(GAME_MIN_BET),
+            MinBetValidator(GAME_MIN_BET),
         )
     )
 

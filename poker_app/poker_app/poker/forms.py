@@ -23,7 +23,7 @@ class CreatePokerGameForm(forms.ModelForm, BootstrapFormMixin):
 
     class Meta:
         model = Poker
-        exclude = ('user',)
+        exclude = ('user', )
 
         widgets = {
             'name': forms.TextInput(
@@ -37,13 +37,31 @@ class CreatePokerGameForm(forms.ModelForm, BootstrapFormMixin):
                     'placeholder': 'Enter max players',
                 }
             ),
+
+            'min_bet': forms.TextInput(
+                attrs={
+                    'placeholder': 'Enter min bet for the game',
+                }
+            ),
+
+            'max_bet': forms.TextInput(
+                attrs={
+                    'placeholder': 'Enter max bet for the game',
+                }
+            ),
+
+            # 'game_types': forms.TextInput(
+            #     attrs={
+            #         'placeholder': 'Choose your game type',
+            #     }
+            # ),
         }
 
 
 class EditPokerGameForm(forms.ModelForm, BootstrapFormMixin):
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self._init_bootstrap_form_controls()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._init_bootstrap_form_controls()
 
     class Meta:
         model = Poker

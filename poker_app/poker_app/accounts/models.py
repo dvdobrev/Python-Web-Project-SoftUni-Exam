@@ -1,5 +1,5 @@
 from django.contrib.auth import models as auth_models
-from django.core.validators import MinLengthValidator, MaxLengthValidator
+from django.core.validators import MinLengthValidator, MaxLengthValidator, MinValueValidator
 
 from django.db import models
 
@@ -42,34 +42,35 @@ class PokerUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
 class Profile(models.Model):
     FIRST_NAME_MIN_LENGTH = 2
     FIRST_NAME_MAX_LENGTH = 20
+
     LAST_NAME_MIN_LENGTH = 2
     LAST_NAME_MAX_LENGTH = 20
 
+    MIN_AGE = 18
 
-    # first_name = models.CharField(
-    #     max_length=FIRST_NAME_MAX_LENGTH,
-    #     validators=(
-    #         MinLengthValidator(FIRST_NAME_MIN_LENGTH),
-    #         MaxLengthValidator(LAST_NAME_MAX_LENGTH),
-    #         validate_only_letters,
-    #     )
-    # )
-    #
-    # last_name = models.CharField(
-    #     max_length=LAST_NAME_MAX_LENGTH,
-    #     validators=(
-    #         MinLengthValidator(LAST_NAME_MIN_LENGTH),
-    #         MaxLengthValidator(LAST_NAME_MAX_LENGTH),
-    #         validate_only_letters,
-    #     )
-    # )
-    #
-    #
-    #
-    # slogan = models.TextField(
-    #     null=True,
-    #     blank=True,
-    # )
+    first_name = models.CharField(
+        max_length=FIRST_NAME_MAX_LENGTH,
+        validators=(
+            MinLengthValidator(FIRST_NAME_MIN_LENGTH),
+            MaxLengthValidator(LAST_NAME_MAX_LENGTH),
+            validate_only_letters,
+        )
+    )
+
+    last_name = models.CharField(
+        max_length=LAST_NAME_MAX_LENGTH,
+        validators=(
+            MinLengthValidator(LAST_NAME_MIN_LENGTH),
+            MaxLengthValidator(LAST_NAME_MAX_LENGTH),
+            validate_only_letters,
+        )
+    )
+
+    age = models.IntegerField(
+        validators=(
+            MinValueValidator(MIN_AGE),
+        )
+    )
 
     email = models.EmailField(
         unique=True,

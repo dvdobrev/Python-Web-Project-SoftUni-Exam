@@ -1,15 +1,16 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from django.views import generic as views
 from django.contrib.auth import views as auth_views, login
 
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 
 from poker_app.accounts.forms import EditProfileForm, CreateProfileForm, DeleteProfileForm
-from poker_app.accounts.models import Profile, PokerUser
+from poker_app.accounts.models import Profile
 
-
-# TODO: 'add RedirectToHomePage to the UserRegisterView'
+from django.conf import settings
+from django.core.mail import send_mail
 
 
 class UserRegisterView(views.CreateView):
@@ -28,6 +29,27 @@ class UserRegisterView(views.CreateView):
 class UserLoginView(auth_views.LoginView):
     template_name = 'accounts/login-page.html'
     success_url = reverse_lazy('dashboard')
+
+    def user_log_in(request):
+        if request.method == 'POST':
+            username = request.POST['username']
+            password = request.POST['password']
+            email = request.POST['email']
+
+            user = User.objects.create_user(
+                username=username,
+                password=password,
+                email=email)
+
+            login(request, user)
+            subject = 'Hi Dobri, I am trying to send an Email'
+            message = f'So it works. Let drink a coffe Dobri'
+            email_form = settings.EMAIL_HOST_USER
+            recipient_list = [user.email, ]
+            send_mail(subject, message, email_form, recipient_list)
+
+            return redirect('dashboard')
+        return render(request, 'accounts/login-page.html')
 
     def get_success_url(self):
         if self.success_url:
@@ -53,20 +75,6 @@ class ProfileDetailsView(views.DetailView):
     template_name = 'accounts/profile-details.html'
     success_url = reverse_lazy('home page')
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     # self.object is a Profile instance
-    #     tables = list(Poker.objects.filter(user_id=self.object.user_id))
-    #
-    #     context.update({
-    #         # 'total_likes_count': total_likes_count,
-    #         # 'total_pet_photos_count': total_pet_photos_count,
-    #         'is_owner': self.object.user_id == self.request.user.id,
-    #         'tables': tables,
-    #     })
-    #
-    #     return context
-
 
 @login_required
 def delete_profile(request, pk):
@@ -84,7 +92,3 @@ def delete_profile(request, pk):
     }
 
     return render(request, 'accounts/profile-delete.html', context)
-
-#
-# class ChangeUserPasswordView(auth_views.PasswordChangeView):
-#     template_name = 'accounts/change_password.html'

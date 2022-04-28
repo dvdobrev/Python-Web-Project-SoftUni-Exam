@@ -24,7 +24,10 @@ SECRET_KEY = 'django-insecure-vzysbb9khhsn$q7*n)fny1q90re0^a(0p%*^^#@o0m30u&au6v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    # 'localhost',
+    # '127.0.0.1:8000',
+]
 
 # Application definition
 
@@ -41,7 +44,6 @@ INSTALLED_APPS = [
     'poker_app.poker',
     'poker_app.roulette',
     'poker_app.dice',
-    # 'poker_app.accounts.PokerUser',
 
 ]
 
@@ -53,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'poker_app.middlewares.handle_exceptions',
 ]
 
 ROOT_URLCONF = 'poker_app.urls'
@@ -127,6 +130,14 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     BASE_DIR / 'static',
 )
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'ddd@vcard24h.com'
+EMAIL_HOST_PASSWORD = ''
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

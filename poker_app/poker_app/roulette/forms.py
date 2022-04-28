@@ -3,6 +3,7 @@ from django import forms
 from poker_app.roulette.models import Roulette
 from poker_app.web.helpers import BootstrapFormMixin
 
+
 class CreateRouletteRoomForm(forms.ModelForm, BootstrapFormMixin):
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -26,13 +27,25 @@ class CreateRouletteRoomForm(forms.ModelForm, BootstrapFormMixin):
         widgets = {
             'name': forms.TextInput(
                 attrs={
-                    'placeholder': 'Enter room name',
+                    'placeholder': 'Enter game name',
                 }
             ),
 
             'max_players': forms.TextInput(
                 attrs={
                     'placeholder': 'Enter max players',
+                }
+            ),
+
+            'min_bet': forms.TextInput(
+                attrs={
+                    'placeholder': 'Enter min bet',
+                }
+            ),
+
+            'max_bet': forms.TextInput(
+                attrs={
+                    'placeholder': 'Enter max bet',
                 }
             ),
         }
@@ -49,15 +62,7 @@ class EditRouletteRoomForm(BootstrapFormMixin, forms.ModelForm):
         exclude = ('user',)
 
 
-class DisabledFieldsFormMixin:
-    pass
-
-
-class DeleteRouletteRoomForm(forms.ModelForm, BootstrapFormMixin, DisabledFieldsFormMixin):
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self._init_bootstrap_form_controls()
-    #     self._init_disabled_fields()
+class DeleteRouletteRoomForm(forms.ModelForm, BootstrapFormMixin):
 
     def save(self, commit=True):
         self.instance.delete()

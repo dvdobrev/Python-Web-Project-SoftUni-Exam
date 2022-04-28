@@ -1,17 +1,20 @@
-
-{% extends 'base.html'%}
+{% extends 'base.html' %}
 {% block page_content %}
 
-<h1 class="text-center">Are you sure you want to delete the roulette game {{ roulette.name }}?</h1>
+    <h2 style="color: white" class="text-center">Are you sure you want to delete the roulette
+        game {{ roulette.name }}?</h2>
+    <br>
+    <br>
+    <br>
 
-<form method="post" action="{% url 'delete roulette game page' roulette.pk %}">
-    {% csrf_token %}
-    {{ form }}
+    <form method="post" action="{% url 'delete roulette game page' roulette.pk %}">
+        {% csrf_token %}
+        {{ form }}
 
-    <button class="btn btn-primary mt-2" type="submit">Delete</button>
-    <a class="button edit"
-       href="{% url 'all games page' %}">Go back</a>
+        <button class="btn btn-primary mt-2" type="submit">Delete</button>
+        <a class="button edit"
+           href="{% url 'all games page' %}">Go back</a>
 
-</form>
+    </form>
 
 {% endblock %}

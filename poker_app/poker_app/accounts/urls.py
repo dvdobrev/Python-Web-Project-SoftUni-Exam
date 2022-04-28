@@ -2,13 +2,14 @@
 from django.urls import path
 
 
-from poker_app.accounts.views import UserRegisterView, UserLoginView, ProfileEditView, ProfileDetailsView, \
-    UserLogoutView, delete_profile
+from poker_app.accounts.views import UserRegisterView, ProfileEditView, ProfileDetailsView, \
+    UserLogoutView, delete_profile, UserLoginView
 
 urlpatterns = (
 
     path('register/', UserRegisterView.as_view(), name='register'),
     path('login/', UserLoginView.as_view(), name='login page'),
+    # path('login/', user_log_in, name='login page'),
     path('logout/', UserLogoutView.as_view(), name='logout page'),
 
 
