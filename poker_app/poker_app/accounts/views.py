@@ -4,14 +4,10 @@ from django.shortcuts import redirect, render
 from django.views import generic as views
 from django.contrib.auth import views as auth_views, login
 
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy
 
 from poker_app.accounts.forms import EditProfileForm, CreateProfileForm, DeleteProfileForm
 from poker_app.accounts.models import Profile
-
-from django.conf import settings
-from django.core.mail import send_mail
-
 
 class UserRegisterView(views.CreateView):
     form_class = CreateProfileForm
@@ -30,26 +26,26 @@ class UserLoginView(auth_views.LoginView):
     template_name = 'accounts/login-page.html'
     success_url = reverse_lazy('dashboard')
 
-    def user_log_in(request):
-        if request.method == 'POST':
-            username = request.POST['username']
-            password = request.POST['password']
-            email = request.POST['email']
-
-            user = User.objects.create_user(
-                username=username,
-                password=password,
-                email=email)
-
-            login(request, user)
-            subject = 'Hi Dobri, I am trying to send an Email'
-            message = f'So it works. Let drink a coffe Dobri'
-            email_form = settings.EMAIL_HOST_USER
-            recipient_list = [user.email, ]
-            send_mail(subject, message, email_form, recipient_list)
-
-            return redirect('dashboard')
-        return render(request, 'accounts/login-page.html')
+    # def user_log_in(request):
+    #     if request.method == 'POST':
+    #         username = request.POST['username']
+    #         password = request.POST['password']
+    #         email = request.POST['email']
+    #
+    #         user = User.objects.create_user(
+    #             username=username,
+    #             password=password,
+    #             email=email)
+    #
+    #         login(request, user)
+    #         subject = 'Hi Dobri, I am trying to send an Email'
+    #         message = f'So it works. Let drink a coffe Dobri'
+    #         email_form = settings.EMAIL_HOST_USER
+    #         recipient_list = [user.email, ]
+    #         send_mail(subject, message, email_form, recipient_list)
+    #
+    #         return redirect('dashboard')
+    #     return render(request, 'accounts/login-page.html')
 
     def get_success_url(self):
         if self.success_url:
@@ -74,6 +70,11 @@ class ProfileDetailsView(views.DetailView):
     model = Profile
     template_name = 'accounts/profile-details.html'
     success_url = reverse_lazy('home page')
+
+
+class ChangeUserPasswordView(auth_views.PasswordChangeView):
+    template_name = 'accounts/change-password-page.html'
+    success_url = reverse_lazy('dashboard')
 
 
 @login_required

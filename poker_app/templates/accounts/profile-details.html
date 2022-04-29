@@ -3,7 +3,7 @@
 
     <h1 class="text-center">Hello {{ profile.first_name }} {{ profile.last_name }}</h1>
 
-    <form method="post" action="{% url 'profile details page' profile.pk %}">
+    <form class='center' method="post" action="{% url 'profile details page' profile.pk %}">
         {% if profile.picture %}
             <div class="d-inline p-2 w-50">
                 <img src="{{ profile.picture }}"
@@ -17,7 +17,6 @@
             <h2 style="color: white"><u>Name: </u> {{ profile.first_name }} {{ profile.last_name }}</h2>
             {#  getter property `fullname` in profile is also fine #}
 
-            {# <h5><u>Birthdate:</u> July 15, 1999</h5>#}
             {% if profile.age %}
                 <h2 style="color: white"><u>Age: </u> {{ profile.age }}</h2>
             {% endif %}
@@ -27,10 +26,13 @@
 
         </div>
 
-        <div>
-            <a href="{% url 'edit profile page' profile.pk %}" class="btn btn-danger">Edit</a>
-            <a href="{% url 'profile delete page' profile.pk %}" class="btn btn-danger">Delete</a>
-            <a href="{% url 'dashboard' %}" class="btn btn-danger">Go Back</a>
+        <a href="{% url 'change password' %}" class="btn btn-danger">Change password</a>
+
+        <a href="{% url 'edit profile page' profile.pk %}" class="btn btn-danger">Edit</a>
+
+        <a href="{% url 'profile delete page' profile.pk %}" class="btn btn-danger">Delete</a>
+
+        <a href="{% url 'dashboard' %}" class="btn btn-danger">Go Back</a>
 
     </form>
 {% endblock %}
