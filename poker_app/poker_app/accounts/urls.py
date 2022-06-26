@@ -1,4 +1,4 @@
-
+from poker_app.web.signals import *
 from django.urls import path
 
 
@@ -21,3 +21,5 @@ urlpatterns = (
     path('delete/<int:pk>/', delete_profile, name='profile delete page'),
 
 )
+
+

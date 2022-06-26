@@ -33,6 +33,8 @@ class PokerUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         default=False,
     )
 
+    email = models.EmailField()
+
     # which attribute should be use bei log in (username or email)
     USERNAME_FIELD = 'username'  # or email
 

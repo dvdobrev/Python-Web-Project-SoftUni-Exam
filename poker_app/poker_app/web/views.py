@@ -42,7 +42,7 @@ class DashboardView(views.ListView):
 
 
 def get_all_games(request):
-    ERROR_MESSAGE = 'There is no GAMES. You have to create a game'
+    # ERROR_MESSAGE = 'There is no GAMES. You have to create a game'
 
     poker_games = Poker.objects.all()
     dice_games = Dice.objects.all()

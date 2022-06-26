@@ -132,12 +132,11 @@ STATICFILES_DIRS = (
 )
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.abv.bg'  # ENV VARIABLES
+EMAIL_HOST_USER = 'django_dobri@abv.bg'  # ENV VARIABLES
+EMAIL_HOST_PASSWORD = 'd00000000'  # ENV VARIABLES
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'ddd@vcard24h.com'
-EMAIL_HOST_PASSWORD = ''
-
+EMAIL_USE_TLS = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -148,3 +147,9 @@ LOGOUT_REDIRECT_URL = 'home page'
 
 AUTH_USER_MODEL = 'accounts.PokerUser'
 # AUTH_USER_MODEL = 'users.ModelUser'
+
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
